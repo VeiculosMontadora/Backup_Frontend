@@ -1,0 +1,4 @@
+commitlint.config.ts
+vite.config.ts
+jest.config.ts
+/tests
