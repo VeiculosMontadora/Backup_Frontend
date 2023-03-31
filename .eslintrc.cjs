@@ -36,6 +36,8 @@ module.exports = {
     "@typescript-eslint/quotes": "off",
     "@typescript-eslint/semi": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": [
       "error",
       {
