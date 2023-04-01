@@ -12,6 +12,7 @@ coverage
 dist
 dist-ssr
 *.local
+.gitconfig
 
 # Editor directories and files
 .vscode/*
