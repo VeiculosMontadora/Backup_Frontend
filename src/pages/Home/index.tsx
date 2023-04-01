@@ -4,7 +4,7 @@ import { usePost } from "../../hooks/useApiCall"
 import GlobalStyle from "../../styles/styles"
 import { Container, Content } from "./styles"
 
-const Main = () => {
+const Home = () => {
   const [uploadedFiles, setUploadedFiles] = useState<any>([])
   const [processingPage, setProcessingPage] = useState(false)
   const [startUpload, setStartUpload] = useState(false)
@@ -40,4 +40,4 @@ const Main = () => {
   )
 }
 
-export default Main
+export default Home
