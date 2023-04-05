@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Button from "@mui/material/Button"
 import { useTranslation } from "react-i18next"
 import { usePost } from "../../hooks/useApiCall"
 import GlobalStyle from "../../styles/styles"
 import { Container, Content } from "./styles"
+import { MockFiles } from "../../components/FileLoading"
 
 const Home = () => {
   const [uploadedFiles, setUploadedFiles] = useState<any>([])
@@ -39,6 +40,21 @@ const Home = () => {
         {t("fileUpload.buttons.send")}
       </Button>
       <GlobalStyle />
+
+      <p style={{ justifyContent: "center" }}>
+        <code>
+          <pre>
+            {`
+              {/* An example of each of the variations and their props */}
+              {/* TODO: Review and Remove */}
+              <MockFiles />
+            `}
+          </pre>
+        </code>
+      </p>
+      {/* An example of each of the variations and their props */}
+      {/* TODO: Review and Remove */}
+      <MockFiles />
     </Container>
   )
 }

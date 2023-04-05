@@ -1,4 +1,4 @@
-import React from "react"
+import { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
 import { HashRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
@@ -12,7 +12,7 @@ import "./hooks/useI18n"
 import "./styles/styles"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -20,5 +20,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/view-pdf" element={<ViewPdf />} />
       </Routes>
     </HashRouter>
-  </React.StrictMode>
+  </StrictMode>
 )

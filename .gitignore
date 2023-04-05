@@ -26,3 +26,6 @@ dist-ssr
 *.sw?
 
 .env
+
+# Ignored auto-generated npm lock file
+package-lock.json
