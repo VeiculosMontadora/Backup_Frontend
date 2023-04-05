@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Button from "@mui/material/Button"
+import { useTranslation } from "react-i18next"
 import { usePost } from "../../hooks/useApiCall"
 import GlobalStyle from "../../styles/styles"
 import { Container, Content } from "./styles"
@@ -8,6 +9,8 @@ const Home = () => {
   const [uploadedFiles, setUploadedFiles] = useState<any>([])
   const [processingPage, setProcessingPage] = useState(false)
   const [startUpload, setStartUpload] = useState(false)
+
+  const { t } = useTranslation()
 
   const { loading, refresh, result, statusCode } = usePost({
     method: "POST",
@@ -33,7 +36,7 @@ const Home = () => {
         <p style={{ justifyContent: "center" }}>teste</p>
       </Content>
       <Button onClick={processUpload} variant="contained" component="label">
-        Upload
+        {t("fileUpload.buttons.send")}
       </Button>
       <GlobalStyle />
     </Container>
