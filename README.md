@@ -32,7 +32,7 @@ Para isso, é necessário estar com um terminal aberto na pasta raiz do projeto.
 
 ```sh
 yarn dev
-``` 
+```
 
 Depois, acesse o endereço `http://localhost:3000` no seu navegador.
 
