@@ -19,6 +19,17 @@ export type FileLoadingProps = {
   /** has uploaded to server and back */
   isLoaded?: boolean
 
+  /** index of the file in the array */
+  index?: number
+
   /** for the "dowloaded" state */
-  handleDeleteClick?: () => void
+  handleDeleteClick?: (index: number) => void
+}
+
+export type DeleteComponentProps = {
+  /** index of the file to be deleted */
+  index: number
+
+  /** function to be called when delete button is clicked */
+  handleClick: (index: number) => void
 }
