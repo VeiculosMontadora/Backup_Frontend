@@ -1,11 +1,14 @@
-import { useState } from "react"
 import DeleteIcon from "@mui/icons-material/Delete"
 import CircularProgress, {
   circularProgressClasses,
 } from "@mui/material/CircularProgress"
 import LinearProgress from "@mui/material/LinearProgress"
-import { Wrapper, Title, DeleteButton, MockWrapper } from "./styles"
-import { FileLoadingProps, LoadingIconBarProps } from "./types"
+import {
+  DeleteComponentProps,
+  FileLoadingProps,
+  LoadingIconBarProps,
+} from "./types"
+import { Wrapper, Title, DeleteButton } from "./styles"
 import { blue } from "../../styles/colors"
 
 // Infinitely spinning progress for file download
@@ -37,8 +40,8 @@ const LoadingIconBar = ({ isLoaded }: LoadingIconBarProps) => {
   )
 }
 
-const DeleteComponent = ({ handleClick }: { handleClick: () => void }) => (
-  <DeleteButton onClick={handleClick}>
+const DeleteComponent = ({ index, handleClick }: DeleteComponentProps) => (
+  <DeleteButton onClick={() => handleClick(index)}>
     <DeleteIcon />
   </DeleteButton>
 )
@@ -47,6 +50,7 @@ const FileLoading = ({
   fileName,
   status,
   isLoaded,
+  index = 0,
   handleDeleteClick,
 }: FileLoadingProps) => {
   const isSpin = status === "downloading"
@@ -57,51 +61,12 @@ const FileLoading = ({
     <Wrapper data-status={status}>
       <Title variant="h2">{fileName}</Title>
       {isSpin && <LoadingIconSpin />}
-      {isDeletable && <DeleteComponent handleClick={handleDeleteClick} />}
+      {isDeletable && (
+        <DeleteComponent index={index} handleClick={handleDeleteClick} />
+      )}
       {isBar && <LoadingIconBar isLoaded={!!isLoaded} />}
     </Wrapper>
   )
 }
 
 export default FileLoading
-
-// Just for showcase, to be deleted when approved
-export const MockFiles = () => {
-  const [isShown, setIsShown] = useState(true)
-  function handleDeleteClick() {
-    setIsShown(false)
-  }
-
-  return (
-    <MockWrapper>
-      <FileLoading
-        fileName="LP Jeep Nacional Commander - Dez 22.pdf"
-        status="downloading"
-      />
-
-      {isShown && (
-        <FileLoading
-          fileName="LP Jeep Nacional Commander - Dez 22.pdf"
-          status="downloaded"
-          handleDeleteClick={handleDeleteClick}
-        />
-      )}
-
-      <FileLoading
-        fileName="LP Jeep Nacional Commander - Dez 22.pdf"
-        status="uploading"
-      />
-
-      <FileLoading
-        fileName="LP Jeep Nacional Commander - Dez 22.pdf"
-        status="uploading"
-        isLoaded
-      />
-
-      <FileLoading
-        fileName="LP Jeep Nacional Commander - Dez 22.pdf"
-        status="uploaded"
-      />
-    </MockWrapper>
-  )
-}
