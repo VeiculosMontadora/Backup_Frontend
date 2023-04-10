@@ -1,0 +1,29 @@
+{
+  "fileUpload": {
+    "buttons": {
+      "view": "VISUALIZAR CONTEÚDO",
+      "send": "ENVIAR PARA ANÁLISE",
+      "cancel": "CANCELAR"
+    },
+    "title": "Extração de PDF - Sinosserra",
+    "selectedPdfs": "PDFs selecionados",
+    "selectAssembler": "Selecione a montadora",
+    "dropzone": {
+      "accepted": "Arquivo suportado",
+      "rejected": "Arquivo não suportado",
+      "title": "Arraste e solte ou ",
+      "titleURL": "Selecione o arquivo",
+      "warning": "O formato .pdf é obrigatório"
+    }
+  },
+  "extraction": {
+    "title": "Fazendo a extração de dados..",
+    "subtitle": "Isso pode levar de 2 a 5 minutos",
+    "success": "Extração concluída!"
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "A página que você está procurando não existe",
+    "button": "Voltar para a tela principal"
+  }
+}
