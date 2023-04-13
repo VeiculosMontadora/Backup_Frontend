@@ -1,5 +1,7 @@
 # Environment variables.
 variables:
+  # The Docker host variable is used to connect to the Docker daemon.
+  DOCKER_HOST: tcp://docker:2376/
   # GitLab API token, needed to comment on the Merge Request.
   GITLAB_API_TOKEN: $GITLAB_API_TOKEN
   # Discord webhook URL, needed to send a message to the Discord channel.
@@ -15,12 +17,7 @@ variables:
   AWS_ECR_REPOSITORY_NAME: $AWS_ECR_REPOSITORY_NAME
   # Image prefix.
   # This is the prefix that will be used to tag the application image.
-  IMAGE_PREFIX: "frontend"
-
-# Dind means that the docker daemon is running inside the container.
-# Basically it's a Docker inside a Docker.
-services:
-  - docker:dind
+  IMAGE_PREFIX: frontend
 
 # Stages.
 # The stages are used to organize the jobs.
@@ -72,13 +69,18 @@ test:
 
 # Build and publish stage.
 #
-# This stage builds the application image and publishes it to AWS ECR.
+# This stage builds the application image and publishes it to AWS ECR using Docker.
 #
 # This stage will run when a commit is pushed to the main branch.
 # This stage can also be triggered manually when commits are pushed to the develop branch.
 build_and_publish:
   stage: build_and_publish
-  image: docker:24.0.0-beta.1-dind-alpine3.17
+  image: docker:23.0.3-cli-alpine3.17
+  # The service docker:dind is used to run the Docker daemon inside the container.
+  # This is needed because the Docker CLI is used to build and push the application image.
+  # dind stands for Docker in Docker.
+  services:
+    - docker:dind
   script:
     # Install AWS CLI.
     - echo "[Installing AWS CLI]"
