@@ -4,6 +4,7 @@ import { usePost } from "../../hooks/useApiCall"
 import Upload from "../../components/Upload"
 import FileLoading from "../../components/FileLoading"
 import Button from "../../components/Button"
+import Dropdown from "../../components/Dropdown"
 import {
   Container,
   Content,
@@ -85,7 +86,7 @@ const Home = () => {
                           status="downloaded"
                           handleDeleteClick={() => handleDeleteClick(index)}
                         />
-                        <p>Dropdown aqui</p>
+                        <Dropdown />
                       </FilesRow>
                     )
                   })}
