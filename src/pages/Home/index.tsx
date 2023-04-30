@@ -1,53 +1,43 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { usePost } from "../../hooks/useApiCall"
+import { Link, useNavigate } from "react-router-dom"
 import Upload from "../../components/Upload"
 import FileLoading from "../../components/FileLoading"
 import Button from "../../components/Button"
 import Dropdown from "../../components/Dropdown"
-import {
+import usePost from "../../hooks/usePost"
+import { SubTitle, FilesWrapper, FilesRow, SendButton } from "./styles"
+import GlobalStyle, {
   Container,
   Content,
   HeaderTitle,
-  SubTitle,
-  FilesWrapper,
-  FilesRow,
-  SendButton,
-} from "./styles"
-import GlobalStyle from "../../styles/styles"
+} from "../../styles/styles"
+
+type Request = {
+  file: File
+  error: boolean
+}
 
 const Home = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
-  const [processingPage, setProcessingPage] = useState(false)
-  const [startUpload, setStartUpload] = useState(false)
-  const [uploadComplete, setUploadComplete] = useState(true)
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const { loading, refresh, result, statusCode } = usePost({
-    method: "POST",
-    start: startUpload,
-    data: uploadedFiles,
-  })
+  const { error, post } = usePost()
 
-  // eslint-disable-next-line no-console
-  console.log(
-    loading,
-    refresh,
-    result,
-    statusCode,
-    setUploadedFiles,
-    setUploadComplete
-  )
-
-  const processUpload = () => {
-    // TODO: Check if file has something like "chevrolet", "jeep" and send it's type in body of the request
-
-    setStartUpload(true)
-    setProcessingPage(true)
-  }
-
-  // eslint-disable-next-line no-console
-  console.log(processUpload)
+  const processUpload = useCallback(() => {
+    const requests: Request[] = []
+    uploadedFiles.forEach(async (file) => {
+      const formData = new FormData()
+      formData.append("file", file)
+      await post(formData)
+      requests.push({
+        file,
+        error,
+      })
+    })
+    navigate("/process", { state: { requests } })
+  }, [error, navigate, post, uploadedFiles])
 
   const handleDeleteClick = (index: number) => {
     const newUploadedFiles = uploadedFiles.filter((_, i) => i !== index)
@@ -57,55 +47,43 @@ const Home = () => {
   return (
     <Container>
       <Content>
-        {processingPage ? (
-          <>
-            <p>Página de Processamento</p>
-            <Button
-              text={t("fileUpload.buttons.cancel")}
-              color="red"
-              onClick={() => setProcessingPage((prev) => !prev)}
-            />
-          </>
-        ) : (
-          <>
+        <>
+          <Link to="/view">
             <HeaderTitle variant="h6">{t("fileUpload.title")}</HeaderTitle>
-            <Upload
-              size={uploadedFiles.length > 0}
-              uploadedFiles={uploadedFiles}
-              setUploadedFiles={setUploadedFiles}
-            />
-            {uploadedFiles.length > 0 && (
-              <>
-                <SubTitle>{t("fileUpload.selectedPdfs")}</SubTitle>
-                <FilesWrapper>
-                  {uploadedFiles.map((file, index) => {
-                    return (
-                      <FilesRow key={file.name + file.size + file.type}>
-                        <FileLoading
-                          fileName={file.name}
-                          status="downloaded"
-                          handleDeleteClick={() => handleDeleteClick(index)}
-                        />
-                        <Dropdown />
-                      </FilesRow>
-                    )
-                  })}
-                </FilesWrapper>
-
-                <SendButton>
-                  <Button
-                    text={t("fileUpload.buttons.send")}
-                    color="blue"
-                    onClick={() => setProcessingPage((prev) => !prev)}
-                    disabled={
-                      !uploadComplete || loading || uploadedFiles.length === 0
-                    }
-                  />
-                </SendButton>
-              </>
-            )}
-          </>
-        )}
+          </Link>
+          <Upload
+            size={uploadedFiles.length > 0}
+            uploadedFiles={uploadedFiles}
+            setUploadedFiles={setUploadedFiles}
+          />
+          {uploadedFiles.length > 0 && (
+            <>
+              <SubTitle>{t("fileUpload.selectedPdfs")}</SubTitle>
+              <FilesWrapper>
+                {uploadedFiles.map((file, index) => {
+                  return (
+                    <FilesRow key={file.name + file.size + file.type}>
+                      <FileLoading
+                        fileName={file.name}
+                        status="downloaded"
+                        handleDeleteClick={() => handleDeleteClick(index)}
+                      />
+                      <Dropdown />
+                    </FilesRow>
+                  )
+                })}
+              </FilesWrapper>
+              <SendButton>
+                <Button
+                  text={t("fileUpload.buttons.send")}
+                  color="blue"
+                  onClick={() => processUpload()}
+                  disabled={uploadedFiles.length === 0}
+                />
+              </SendButton>
+            </>
+          )}
+        </>
       </Content>
       <GlobalStyle />
     </Container>
