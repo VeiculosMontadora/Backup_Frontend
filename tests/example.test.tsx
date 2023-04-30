@@ -1,7 +1,7 @@
 import React from "react"
 import { BrowserRouter } from "react-router-dom"
 import Home from "../src/pages/Home"
-import { act, render } from "@testing-library/react"
+import { render } from "@testing-library/react"
 
 describe("<Home />", () => {
   test("should render the home page", () => {
