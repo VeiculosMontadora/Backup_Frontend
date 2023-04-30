@@ -6,17 +6,13 @@ import FileLoading from "../../components/FileLoading"
 import Button from "../../components/Button"
 import Dropdown from "../../components/Dropdown"
 import usePost from "../../hooks/usePost"
+import { Request } from "./types"
 import { SubTitle, FilesWrapper, FilesRow, SendButton } from "./styles"
 import GlobalStyle, {
   Container,
   Content,
   HeaderTitle,
 } from "../../styles/styles"
-
-type Request = {
-  file: File
-  error: boolean
-}
 
 const Home = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])

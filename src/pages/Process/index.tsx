@@ -1,12 +1,9 @@
 import { useTranslation } from "react-i18next"
 import { useNavigate, useLocation, Link } from "react-router-dom"
 import Button from "../../components/Button"
+import ProgressIcon from "../../components/ProgressIcon"
 // import useGet from "../../hooks/useGet"
-import GlobalStyle, {
-  Container,
-  Content,
-  HeaderTitle,
-} from "../../styles/styles"
+import GlobalStyle, { Container, Content } from "../../styles/styles"
 
 const Process = () => {
   const { t } = useTranslation()
@@ -30,7 +27,7 @@ const Process = () => {
     <Container>
       <Content>
         <Link to="/view">
-          <HeaderTitle variant="h6">{t("fileUpload.title")}</HeaderTitle>
+          <ProgressIcon progress="extracting" />
         </Link>
         {
           // Fazer um get a cada 5 segundos para verificar status de PDF's.
