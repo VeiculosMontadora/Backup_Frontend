@@ -46,7 +46,7 @@ const LoadingIconBar = ({ isLoaded }: LoadingIconBarProps) => {
 }
 
 const DeleteComponent = ({ index, handleClick }: DeleteComponentProps) => (
-  <DeleteButton onClick={() => handleClick(index)}>
+  <DeleteButton data-testid="delete-button" onClick={() => handleClick(index)}>
     <DeleteIcon />
   </DeleteButton>
 )
@@ -63,8 +63,10 @@ const FileLoading = ({
   const isBar = status === "uploading"
 
   return (
-    <Wrapper data-status={status}>
-      <Title variant="h2">{fileName}</Title>
+    <Wrapper data-status={status} data-testid={status}>
+      <Title variant="h2" data-testid="file-name">
+        {fileName}
+      </Title>
       {isSpin && <LoadingIconSpin />}
       {isDeletable && (
         <DeleteComponent index={index} handleClick={handleDeleteClick} />
