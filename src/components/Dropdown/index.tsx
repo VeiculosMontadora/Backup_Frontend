@@ -10,7 +10,7 @@ const Dropdown = () => {
   const [carManufacturer, setCarManufacturer] = useState<string>("")
   const { t } = useTranslation()
   const handleChange = (event: SelectChangeEvent) => {
-    setCarManufacturer(event.target.value as string)
+    setCarManufacturer(event.target.value)
   }
 
   return (

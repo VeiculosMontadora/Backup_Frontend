@@ -8,6 +8,7 @@ export type Status =
   | /** When client has downloaded the file */ "downloaded"
   | /** While awaiting for server response */ "uploading"
   | /** When server returned response */ "uploaded"
+  | /** Case something goes wrong */ "failed"
 
 export type FileLoadingProps = {
   /** file name */

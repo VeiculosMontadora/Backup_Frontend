@@ -31,7 +31,7 @@ const ProgressIcon = ({ progress }: ProgressProps) => {
 
   return (
     <Wrapper>
-      <IconWrapper>{image}</IconWrapper>
+      <IconWrapper data-testid={progress}>{image}</IconWrapper>
       <Title variant="h2" data-progress={progress}>
         {text}
       </Title>
