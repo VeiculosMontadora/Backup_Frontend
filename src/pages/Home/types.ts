@@ -1,4 +1,9 @@
+export type PdfFile = {
+  pdf: File
+  type: string
+}
+
 export type Request = {
-  file: File
+  file: PdfFile
   error: boolean
 }

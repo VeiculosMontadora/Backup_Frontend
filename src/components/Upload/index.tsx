@@ -1,5 +1,6 @@
 import Dropzone from "react-dropzone"
 import { useTranslation } from "react-i18next"
+import { UploadProps } from "./types"
 import {
   BoxArea,
   BoxAreaMessages,
@@ -7,12 +8,6 @@ import {
   BoxAreaTitle,
   UploadIcon,
 } from "./styles"
-
-interface UploadProps {
-  size: boolean
-  uploadedFiles: File[]
-  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>
-}
 
 const Upload = ({ size, uploadedFiles, setUploadedFiles }: UploadProps) => {
   const { t } = useTranslation()
@@ -48,11 +43,16 @@ const Upload = ({ size, uploadedFiles, setUploadedFiles }: UploadProps) => {
       }}
       onDropAccepted={(files: File[]) => {
         // Check for duplicate files
-        files.map((file) => {
-          if (!uploadedFiles.find((item) => item.name === file.name)) {
-            return setUploadedFiles((prev) => [...prev, file])
+        files.forEach((file) => {
+          if (uploadedFiles.length > 0) {
+            const fileAlreadyAdded = !!uploadedFiles.find(
+              (item) => item.pdf.name === file.name
+            )
+            if (fileAlreadyAdded) {
+              return
+            }
           }
-          return null
+          setUploadedFiles((prev: any) => [...prev, { pdf: file, type: "" }])
         })
       }}
     >
