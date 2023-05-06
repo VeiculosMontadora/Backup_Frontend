@@ -82,4 +82,13 @@ const HeaderTitle = styled(Typography)`
   align-items: center;
 `
 
+export const FilesWrapper = styled.div`
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-right: 0.5rem;
+  flex-grow: 1;
+  overflow-y: auto;
+`
+
 export { Container, Content, HeaderTitle }

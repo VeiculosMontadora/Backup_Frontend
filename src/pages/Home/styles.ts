@@ -10,15 +10,6 @@ export const SubTitle = styled(Typography)`
   font-size: 1rem !important;
 `
 
-export const FilesWrapper = styled.div`
-  gap: 1rem;
-  display: flex;
-  flex-direction: column;
-  padding-right: 0.5rem;
-  flex-grow: 1;
-  overflow-y: auto;
-`
-
 export const FilesRow = styled.div`
   display: grid;
   column-gap: 1rem;

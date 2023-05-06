@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Link, useNavigate } from "react-router-dom"
 import Upload from "../../components/Upload"
@@ -7,38 +7,52 @@ import Button from "../../components/Button"
 import Dropdown from "../../components/Dropdown"
 import usePost from "../../hooks/usePost"
 import { Request } from "./types"
-import { SubTitle, FilesWrapper, FilesRow, SendButton } from "./styles"
+import { SubTitle, FilesRow, SendButton } from "./styles"
 import GlobalStyle, {
   Container,
   Content,
   HeaderTitle,
+  FilesWrapper,
 } from "../../styles/styles"
 
 const Home = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
+  const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
+  const [canUpload, setCanUpload] = useState<boolean>(false)
   const navigate = useNavigate()
   const { t } = useTranslation()
 
   const { error, post } = usePost()
 
   const processUpload = useCallback(() => {
+    if (!canUpload) return
+
     const requests: Request[] = []
-    uploadedFiles.forEach(async (file) => {
+    uploadedFiles.forEach((file) => {
       const formData = new FormData()
       formData.append("file", file)
-      await post(formData)
+      post(formData)
       requests.push({
         file,
         error,
       })
     })
     navigate("/process", { state: { requests } })
-  }, [error, navigate, post, uploadedFiles])
+  }, [canUpload, error, navigate, post, uploadedFiles])
 
   const handleDeleteClick = (index: number) => {
     const newUploadedFiles = uploadedFiles.filter((_, i) => i !== index)
     setUploadedFiles(newUploadedFiles)
   }
+
+  useEffect(() => {
+    const foundEmptyDropdown = uploadedFiles.find((file) => file.type === "")
+
+    if (foundEmptyDropdown === undefined) {
+      setCanUpload(true)
+    } else {
+      setCanUpload(false)
+    }
+  }, [uploadedFiles])
 
   return (
     <Container>
@@ -58,13 +72,19 @@ const Home = () => {
               <FilesWrapper>
                 {uploadedFiles.map((file, index) => {
                   return (
-                    <FilesRow key={file.name + file.size + file.type}>
+                    <FilesRow
+                      key={file.pdf.name + file.pdf.size + file.pdf.type}
+                    >
                       <FileLoading
-                        fileName={file.name}
+                        fileName={file.pdf.name}
                         status="downloaded"
                         handleDeleteClick={() => handleDeleteClick(index)}
                       />
-                      <Dropdown />
+                      <Dropdown
+                        fileName={file.pdf.name}
+                        index={index}
+                        setUploadedFiles={setUploadedFiles}
+                      />
                     </FilesRow>
                   )
                 })}
@@ -74,7 +94,7 @@ const Home = () => {
                   text={t("fileUpload.buttons.send")}
                   color="blue"
                   onClick={() => processUpload()}
-                  disabled={uploadedFiles.length === 0}
+                  disabled={!canUpload}
                 />
               </SendButton>
             </>
