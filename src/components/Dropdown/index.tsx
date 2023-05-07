@@ -37,7 +37,7 @@ const Dropdown = ({ fileName, index, setUploadedFiles }: DropdownProps) => {
 
       if (name?.includes("jeep")) setFiles("jeep")
 
-      if (name?.includes("chev")) setFiles("chev")
+      if (name?.includes("chev")) setFiles("chevrolet")
     }
     checkCarManufacturer()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,7 +58,7 @@ const Dropdown = ({ fileName, index, setUploadedFiles }: DropdownProps) => {
           sx={{ background: lightGray, color: text }}
         >
           <Item value="jeep">{t("fileUpload.pdfType.jeep")}</Item>
-          <Item value="chev">{t("fileUpload.pdfType.chev")}</Item>
+          <Item value="chevrolet">{t("fileUpload.pdfType.chev")}</Item>
           <Item value="others">{t("fileUpload.pdfType.others")}</Item>
         </Select>
       </FormControl>

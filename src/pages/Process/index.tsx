@@ -1,11 +1,11 @@
-import { useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate, useLocation, Link } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import Button from "../../components/Button"
 import FileLoading from "../../components/FileLoading"
 import ProgressIcon from "../../components/ProgressIcon"
+import usePost from "../../hooks/usePost"
 import { Request } from "../Home/types"
-// import useGet from "../../hooks/useGet"
 import GlobalStyle, {
   Container,
   Content,
@@ -18,38 +18,27 @@ const Process = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // const { error, get } = useGet()
+  const post = usePost()
 
-  const { requests } = location.state || {}
-
-  if (requests === undefined) {
-    navigate("/")
-  }
-
-  // eslint-disable-next-line no-console
-  console.log(requests)
+  const [files, setFiles] = useState<Request[]>(location?.state?.requests)
 
   const progressIcon = useMemo(() => {
-    if (
-      requests?.find((file: any) => file.error === true) ||
-      false ||
-      requests?.length === 0
-    ) {
+    if (files?.find((file) => file.error)) {
       return <ProgressIcon progress="fail" />
     }
 
+    if (files?.find((file) => file.loading)) {
+      return <ProgressIcon progress="extracting" />
+    }
+
     return <ProgressIcon progress="success" />
-  }, [requests])
+  }, [files])
 
   const button = useMemo(() => {
-    // All files were uploaded successfully
-
-    // TODO:
-    // Fazer um get a cada 5 segundos para verificar status de PDF's.
-    // Ter uma rota no backend que passamos os nomes dos pdf's e ele retorna os status de todos.
-
-    // eslint-disable-next-line no-constant-condition
-    if (true) {
+    if (
+      files?.find((file: any) => file.error === false) &&
+      files?.find((file: any) => file.loading === false)
+    ) {
       return (
         <Button
           text={t("fileUpload.buttons.view")}
@@ -66,29 +55,46 @@ const Process = () => {
         onClick={() => navigate("/")}
       />
     )
-  }, [navigate, t])
+  }, [files, navigate, t])
+
+  const checkStatus = (file: Request) => {
+    if (file.error) {
+      return "failed"
+    }
+
+    if (file.loading) {
+      return "uploading"
+    }
+
+    return "uploaded"
+  }
+
+  useEffect(() => {
+    if (files === undefined) {
+      navigate("/")
+    }
+
+    files?.forEach((file) => {
+      post(file, setFiles)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Container>
       <Content>
-        <Link to="/view">{progressIcon}</Link>
-        {requests?.length > 0 && (
-          <FilesWrapper>
-            {requests.map((request: Request) => {
-              return (
-                <FileLoading
-                  key={
-                    request.file.pdf.name +
-                    request.file.pdf.size +
-                    request.file.pdf.type
-                  }
-                  fileName={request.file.pdf.name}
-                  status={request.error ? "failed" : "uploading"}
-                />
-              )
-            })}
-          </FilesWrapper>
-        )}
+        {progressIcon}
+        <FilesWrapper>
+          {files?.map((file) => {
+            return (
+              <FileLoading
+                key={file.pdf.name}
+                fileName={file.pdf.name}
+                status={checkStatus(file)}
+              />
+            )
+          })}
+        </FilesWrapper>
         <DoubleButton>{button}</DoubleButton>
       </Content>
       <GlobalStyle />

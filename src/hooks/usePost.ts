@@ -1,35 +1,68 @@
-import { useCallback, useState } from "react"
+import { useCallback } from "react"
+import { Request } from "../pages/Home/types"
 
 const usePost = () => {
-  const [result, setResult] = useState<any>(null)
-  const [error, setError] = useState<boolean>(false)
-  const [loading, setLoading] = useState<boolean>(false)
+  const dev = import.meta.env.DEV
+  const staticURL = dev
+    ? `${import.meta.env.VITE_LOCAL}upload/pdf/`
+    : `${import.meta.env.VITE_PROD}upload/pdf/`
 
   const post = useCallback(
-    async (data: FormData) => {
-      if (loading) {
-        return
-      }
+    (file: Request, setFiles: any) => {
+      const data = new FormData()
+      data.append("file", file.pdf)
+      data.append("montadora", file.type)
 
-      setLoading(true)
-
-      const dev = import.meta.env.DEV
-      const staticURL = dev
-        ? `${import.meta.env.VITE_LOCAL}/upload/pdf/`
-        : `${import.meta.env.VITE_PROD}/upload/pdf/`
-
-      await fetch(staticURL, {
+      fetch(staticURL, {
         body: data,
         method: "POST",
       })
-        .then((res) => setResult(res))
-        .catch(() => setError(true))
-        .finally(() => setLoading(false))
+        .then((res) => {
+          if (res.status !== 200) {
+            setFiles((prevFiles: any[]) => {
+              const newFiles = prevFiles.map((newFile) => {
+                if (newFile.pdf.name !== file.pdf.name) return newFile
+                return {
+                  ...newFile,
+                  error: true,
+                }
+              })
+
+              return newFiles
+            })
+          }
+        })
+        .catch(() => {
+          setFiles((prevFiles: any[]) => {
+            const newFiles = prevFiles.map((newFile) => {
+              if (newFile.pdf.name !== file.pdf.name) return newFile
+              return {
+                ...newFile,
+                error: true,
+              }
+            })
+
+            return newFiles
+          })
+        })
+        .finally(() => {
+          setFiles((prevFiles: any[]) => {
+            const newFiles = prevFiles.map((newFile) => {
+              if (newFile.pdf.name !== file.pdf.name) return newFile
+              return {
+                ...newFile,
+                loading: false,
+              }
+            })
+
+            return newFiles
+          })
+        })
     },
-    [loading]
+    [staticURL]
   )
 
-  return { post, result, loading, error }
+  return post
 }
 
 export default usePost

@@ -38,6 +38,8 @@ Depois, acesse o endereço `http://localhost:3000` no seu navegador.
 
 5. Para mais comandos, veja o arquivo `package.json` em 'scripts'.
 
+6. Não esqueça de criar um arquivo `.env` na raiz do projeto com as variáveis de ambiente necessárias para o projeto. Para mais informações, veja o arquivo `.env.example`.
+
 ### Testes
 
 Para rodar os testes, digite o seguinte comando na raiz do projeto:

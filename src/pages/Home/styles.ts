@@ -1,12 +1,13 @@
 import styled from "styled-components"
 import { Typography } from "@mui/material"
+import { darkGray } from "../../styles/colors"
 
 export const SubTitle = styled(Typography)`
   justify-content: "flex-start";
   display: flex;
   margin-bottom: 10px !important;
   font-weight: 500 !important;
-  color: #676767 !important;
+  color: ${darkGray} !important;
   font-size: 1rem !important;
 `
 

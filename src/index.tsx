@@ -1,4 +1,3 @@
-import { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
@@ -13,14 +12,12 @@ import "./hooks/useI18n"
 import "./styles/styles"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/process" element={<Process />} />
-        <Route path="/view" element={<ViewPdf />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/process" element={<Process />} />
+      <Route path="/view" element={<ViewPdf />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </BrowserRouter>
 )

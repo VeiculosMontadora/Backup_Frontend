@@ -59,10 +59,12 @@ const Upload = ({ size, uploadedFiles, setUploadedFiles }: UploadProps) => {
       {({ getRootProps, getInputProps, isDragActive, isDragReject }: any) => (
         <BoxArea
           {...getRootProps()}
-          size={size}
+          size={size || undefined}
           isDragActive={isDragActive}
           isDragRejected={isDragReject}
-          type={isDragActive && (isDragReject ? "error" : "success")}
+          type={
+            (isDragActive && (isDragReject ? "error" : "success")) || undefined
+          }
         >
           <input {...getInputProps()} />
           <BoxAreaMessages>

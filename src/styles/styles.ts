@@ -87,6 +87,7 @@ export const FilesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 0.5rem;
+  padding-left: 0.5rem;
   flex-grow: 1;
   overflow-y: auto;
 `
