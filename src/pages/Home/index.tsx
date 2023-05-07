@@ -5,8 +5,7 @@ import Upload from "../../components/Upload"
 import FileLoading from "../../components/FileLoading"
 import Button from "../../components/Button"
 import Dropdown from "../../components/Dropdown"
-import usePost from "../../hooks/usePost"
-import { Request } from "./types"
+import { PdfFile, Request } from "./types"
 import { SubTitle, FilesRow, SendButton } from "./styles"
 import GlobalStyle, {
   Container,
@@ -16,28 +15,25 @@ import GlobalStyle, {
 } from "../../styles/styles"
 
 const Home = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
+  const [uploadedFiles, setUploadedFiles] = useState<PdfFile[]>([])
   const [canUpload, setCanUpload] = useState<boolean>(false)
   const navigate = useNavigate()
   const { t } = useTranslation()
-
-  const { error, post } = usePost()
 
   const processUpload = useCallback(() => {
     if (!canUpload) return
 
     const requests: Request[] = []
     uploadedFiles.forEach((file) => {
-      const formData = new FormData()
-      formData.append("file", file)
-      post(formData)
       requests.push({
-        file,
-        error,
+        pdf: file.pdf,
+        type: file.type,
+        error: false,
+        loading: true,
       })
     })
     navigate("/process", { state: { requests } })
-  }, [canUpload, error, navigate, post, uploadedFiles])
+  }, [canUpload, navigate, uploadedFiles])
 
   const handleDeleteClick = (index: number) => {
     const newUploadedFiles = uploadedFiles.filter((_, i) => i !== index)

@@ -4,6 +4,8 @@ export type PdfFile = {
 }
 
 export type Request = {
-  file: PdfFile
+  pdf: File
+  type: string
   error: boolean
+  loading: boolean
 }
