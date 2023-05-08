@@ -17,6 +17,7 @@ const Button = ({ text, color, onClick, disabled }: ButtonProps) => {
       onClick={onClick}
       style={{ textTransform: "uppercase", padding: "15px", width: "85%" }}
       disabled={disabled || false}
+      data-testid="custom-button"
     >
       {text}
     </Btn>

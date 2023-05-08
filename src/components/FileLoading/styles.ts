@@ -12,9 +12,6 @@ import {
 const borderRadius = "6.18px"
 
 export const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-
   position: relative;
 
   gap: 50px;
@@ -29,7 +26,10 @@ export const Wrapper = styled.div`
 
   &[data-status="uploaded"] {
     border: 2.325px solid ${green};
-    border-radius: ${borderRadius};
+  }
+
+  &[data-status="failed"] {
+    border: 2.325px solid ${red};
   }
 
   .loading-icon-bar > span {
@@ -78,4 +78,7 @@ export const Title = styled(Typography)`
   font-size: 18.55px !important;
   line-height: 27.8px !important;
   color: ${text};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
