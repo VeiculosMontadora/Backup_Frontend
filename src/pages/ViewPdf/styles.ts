@@ -19,7 +19,6 @@ export const PageWrapper = styled.div`
   > div:last-of-type {
     flex: 1;
     min-width: 650px;
-    outline: 2px solid green;
   }
 
   @media screen and (max-width: 1308px) {
@@ -49,8 +48,8 @@ export const PageWrapper = styled.div`
 
 export const SaveButton = styled(Button)`
   position: absolute !important;
-  top: 70px;
-  right: 105px;
+  top: 130px;
+  right: 110px;
   width: 100px;
   height: 45px;
   outline: 0;

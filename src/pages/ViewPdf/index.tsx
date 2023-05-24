@@ -1,63 +1,18 @@
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { t } from "i18next"
-import { PageWrapper, SaveButton } from "./styles"
-import TabsView from "../../components/TabsView"
+import { useTranslation } from "react-i18next"
+import { PDF } from "../../components/PDFList/types"
 import HomeButton from "../../components/HomeButton"
 import PDFList from "../../components/PDFList"
-import { PDF } from "../../components/PDFList/types"
+import TabsView from "../../components/TabsView"
+import useGet from "../../hooks/useGet"
+import { PageWrapper, SaveButton } from "./styles"
 import GlobalStyle from "../../styles/styles"
 
-const mockPDFList = [
-  {
-    id: 1,
-    title: "PDF 1",
-    data: {
-      field1: "any_value",
-    },
-  },
-  {
-    id: 2,
-    title: "PDF 2",
-    data: {
-      field1: "any_value",
-    },
-  },
-  {
-    id: 3,
-    title: "PDF 3",
-    data: {
-      field1: "any_value",
-    },
-  },
-  {
-    id: 4,
-    title: "PDF 4",
-    data: {
-      field1: "any_value",
-    },
-  },
-]
-
 const ViewPdf = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
-
-  // TODO: remove PDFs; just placeholder
-  // const [PDFs, setPDFs] = useState<PDF[]>([])
-
-  // TODO: Change to usePDFs hook
-  // const { updateList } = {
-  //   // TODO: Update PDFs list on the hook (?) and remove this function
-  //   updateList: (updatedFile: PDF) => {
-  //     setPDFs((previousFiles) => {
-  //       const PDFIndex = previousFiles.findIndex(
-  //         ({ name }) => name === updatedFile.name
-  //       )
-  //       const newPDFs = [...previousFiles]
-  //       newPDFs[PDFIndex] = updatedFile
-  //       return newPDFs
-  //     })
-  //   },
-  // } // = usePDFs()
+  const { get, result, loading } = useGet()
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onPDFclick = (_file: PDF) => {
@@ -76,15 +31,639 @@ const ViewPdf = () => {
     // TODO: Change to open modal
   }
 
+  useEffect(() => {
+    get()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <PageWrapper>
       <HomeButton onClick={onHomeClick} />
-      <PDFList /* onPDFclick={onPDFclick} onPDFchange={onPDFchange} */ />
+      <PDFList result={result} loading={loading} />
       <div>
+        <TabsView
+          veiculos={[
+            {
+              desc_cat: {
+                valor: "COMPASS SPORT T270",
+                copiado: false,
+              },
+              desc_renavam: {
+                valor: "SPORT T270",
+                copiado: false,
+              },
+              sigla: {
+                valor: "67515M1",
+                copiado: false,
+              },
+              pacote_def_modelo: {
+                valor: "",
+                copiado: false,
+              },
+              versao: {
+                valor: "",
+                copiado: false,
+              },
+              preco: {
+                valor: "R$174.990,00",
+                copiado: false,
+              },
+              ano: {
+                valor: "2023",
+                copiado: false,
+              },
+              marca: {
+                valor: "JEEP",
+                copiado: false,
+              },
+              linha: {
+                valor: "COMPASS",
+                copiado: false,
+              },
+              motor: {
+                modelo: {
+                  valor: "T270 Turbo Flex",
+                  copiado: false,
+                },
+                cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                nro_cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                combustiveis: [
+                  {
+                    potencia: {
+                      valor: "185",
+                      copiado: false,
+                    },
+                    tipo_combustivel: {
+                      valor: "Flex",
+                      copiado: false,
+                    },
+                  },
+                ],
+              },
+              carga: {
+                valor: "",
+                copiado: false,
+              },
+              num_passag: {
+                valor: "",
+                copiado: false,
+              },
+              num_portas: {
+                valor: "",
+                copiado: false,
+              },
+              num_renavam: {
+                valor: "",
+                copiado: false,
+              },
+              producao: {
+                valor: "",
+                copiado: false,
+              },
+              desc_vendas: {
+                valor: "",
+                copiado: false,
+              },
+            },
+            {
+              desc_cat: {
+                valor: "COMPASS LONGITUDE T270",
+                copiado: false,
+              },
+              desc_renavam: {
+                valor: "LONGITUDE T270",
+                copiado: false,
+              },
+              sigla: {
+                valor: "67512M1",
+                copiado: false,
+              },
+              pacote_def_modelo: {
+                valor: "",
+                copiado: false,
+              },
+              versao: {
+                valor: "",
+                copiado: false,
+              },
+              preco: {
+                valor: "R$186.690,00",
+                copiado: false,
+              },
+              ano: {
+                valor: "2023",
+                copiado: false,
+              },
+              marca: {
+                valor: "JEEP",
+                copiado: false,
+              },
+              linha: {
+                valor: "COMPASS",
+                copiado: false,
+              },
+              motor: {
+                modelo: {
+                  valor: "T270 Turbo Flex",
+                  copiado: false,
+                },
+                cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                nro_cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                combustiveis: [
+                  {
+                    potencia: {
+                      valor: "185",
+                      copiado: false,
+                    },
+                    tipo_combustivel: {
+                      valor: "Flex",
+                      copiado: false,
+                    },
+                  },
+                ],
+              },
+              carga: {
+                valor: "",
+                copiado: false,
+              },
+              num_passag: {
+                valor: "",
+                copiado: false,
+              },
+              num_portas: {
+                valor: "",
+                copiado: false,
+              },
+              num_renavam: {
+                valor: "",
+                copiado: false,
+              },
+              producao: {
+                valor: "",
+                copiado: false,
+              },
+              desc_vendas: {
+                valor: "",
+                copiado: false,
+              },
+            },
+            {
+              desc_cat: {
+                valor: "COMPASS LIMITED T270",
+                copiado: false,
+              },
+              desc_renavam: {
+                valor: "LIMITED T270",
+                copiado: false,
+              },
+              sigla: {
+                valor: "67516M1",
+                copiado: false,
+              },
+              pacote_def_modelo: {
+                valor: "",
+                copiado: false,
+              },
+              versao: {
+                valor: "",
+                copiado: false,
+              },
+              preco: {
+                valor: "R$209.490,00",
+                copiado: false,
+              },
+              ano: {
+                valor: "2023",
+                copiado: false,
+              },
+              marca: {
+                valor: "JEEP",
+                copiado: false,
+              },
+              linha: {
+                valor: "COMPASS",
+                copiado: false,
+              },
+              motor: {
+                modelo: {
+                  valor: "T270 Turbo Flex",
+                  copiado: false,
+                },
+                cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                nro_cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                combustiveis: [
+                  {
+                    potencia: {
+                      valor: "185",
+                      copiado: false,
+                    },
+                    tipo_combustivel: {
+                      valor: "Flex",
+                      copiado: false,
+                    },
+                  },
+                ],
+              },
+              carga: {
+                valor: "",
+                copiado: false,
+              },
+              num_passag: {
+                valor: "",
+                copiado: false,
+              },
+              num_portas: {
+                valor: "",
+                copiado: false,
+              },
+              num_renavam: {
+                valor: "",
+                copiado: false,
+              },
+              producao: {
+                valor: "",
+                copiado: false,
+              },
+              desc_vendas: {
+                valor: "",
+                copiado: false,
+              },
+            },
+            {
+              desc_cat: {
+                valor: "COMPASS SERIE S T270",
+                copiado: false,
+              },
+              desc_renavam: {
+                valor: "SERIE S T270",
+                copiado: false,
+              },
+              sigla: {
+                valor: "6751CM1",
+                copiado: false,
+              },
+              pacote_def_modelo: {
+                valor: "",
+                copiado: false,
+              },
+              versao: {
+                valor: "",
+                copiado: false,
+              },
+              preco: {
+                valor: "R$233.790,00",
+                copiado: false,
+              },
+              ano: {
+                valor: "2023",
+                copiado: false,
+              },
+              marca: {
+                valor: "JEEP",
+                copiado: false,
+              },
+              linha: {
+                valor: "COMPASS",
+                copiado: false,
+              },
+              motor: {
+                modelo: {
+                  valor: "T270 Turbo Flex",
+                  copiado: false,
+                },
+                cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                nro_cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                combustiveis: [
+                  {
+                    potencia: {
+                      valor: "185",
+                      copiado: false,
+                    },
+                    tipo_combustivel: {
+                      valor: "Flex",
+                      copiado: false,
+                    },
+                  },
+                ],
+              },
+              carga: {
+                valor: "",
+                copiado: false,
+              },
+              num_passag: {
+                valor: "",
+                copiado: false,
+              },
+              num_portas: {
+                valor: "",
+                copiado: false,
+              },
+              num_renavam: {
+                valor: "",
+                copiado: false,
+              },
+              producao: {
+                valor: "",
+                copiado: false,
+              },
+              desc_vendas: {
+                valor: "",
+                copiado: false,
+              },
+            },
+            {
+              desc_cat: {
+                valor: "COMPASS LONGITUDE TD350 4X4",
+                copiado: false,
+              },
+              desc_renavam: {
+                valor: "LONGITUDE TD350 4X4",
+                copiado: false,
+              },
+              sigla: {
+                valor: "6751291",
+                copiado: false,
+              },
+              pacote_def_modelo: {
+                valor: "",
+                copiado: false,
+              },
+              versao: {
+                valor: "",
+                copiado: false,
+              },
+              preco: {
+                valor: "R$232.390,00",
+                copiado: false,
+              },
+              ano: {
+                valor: "2023",
+                copiado: false,
+              },
+              marca: {
+                valor: "JEEP",
+                copiado: false,
+              },
+              linha: {
+                valor: "COMPASS",
+                copiado: false,
+              },
+              motor: {
+                modelo: {
+                  valor: "TD350 Turbo Diesel",
+                  copiado: false,
+                },
+                cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                nro_cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                combustiveis: [
+                  {
+                    potencia: {
+                      valor: "170",
+                      copiado: false,
+                    },
+                    tipo_combustivel: {
+                      valor: "Diesel",
+                      copiado: false,
+                    },
+                  },
+                ],
+              },
+              carga: {
+                valor: "",
+                copiado: false,
+              },
+              num_passag: {
+                valor: "",
+                copiado: false,
+              },
+              num_portas: {
+                valor: "",
+                copiado: false,
+              },
+              num_renavam: {
+                valor: "",
+                copiado: false,
+              },
+              producao: {
+                valor: "",
+                copiado: false,
+              },
+              desc_vendas: {
+                valor: "",
+                copiado: false,
+              },
+            },
+            {
+              desc_cat: {
+                valor: "COMPASS LIMITED TD350 4X4",
+                copiado: false,
+              },
+              desc_renavam: {
+                valor: "LIMITED TD350 4X4",
+                copiado: false,
+              },
+              sigla: {
+                valor: "6751391",
+                copiado: false,
+              },
+              pacote_def_modelo: {
+                valor: "",
+                copiado: false,
+              },
+              versao: {
+                valor: "",
+                copiado: false,
+              },
+              preco: {
+                valor: "R$252.790,00",
+                copiado: false,
+              },
+              ano: {
+                valor: "2023",
+                copiado: false,
+              },
+              marca: {
+                valor: "JEEP",
+                copiado: false,
+              },
+              linha: {
+                valor: "COMPASS",
+                copiado: false,
+              },
+              motor: {
+                modelo: {
+                  valor: "TD350 Turbo Diesel",
+                  copiado: false,
+                },
+                cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                nro_cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                combustiveis: [
+                  {
+                    potencia: {
+                      valor: "170",
+                      copiado: false,
+                    },
+                    tipo_combustivel: {
+                      valor: "Diesel",
+                      copiado: false,
+                    },
+                  },
+                ],
+              },
+              carga: {
+                valor: "",
+                copiado: false,
+              },
+              num_passag: {
+                valor: "",
+                copiado: false,
+              },
+              num_portas: {
+                valor: "",
+                copiado: false,
+              },
+              num_renavam: {
+                valor: "",
+                copiado: false,
+              },
+              producao: {
+                valor: "",
+                copiado: false,
+              },
+              desc_vendas: {
+                valor: "",
+                copiado: false,
+              },
+            },
+            {
+              desc_cat: {
+                valor: "COMPASS TRAILHAWK TD350 4X4",
+                copiado: false,
+              },
+              desc_renavam: {
+                valor: "TRAILHAWK TD350 4X4",
+                copiado: false,
+              },
+              sigla: {
+                valor: "6751191",
+                copiado: false,
+              },
+              pacote_def_modelo: {
+                valor: "",
+                copiado: false,
+              },
+              versao: {
+                valor: "",
+                copiado: false,
+              },
+              preco: {
+                valor: "R$252.790,00",
+                copiado: false,
+              },
+              ano: {
+                valor: "2023",
+                copiado: false,
+              },
+              marca: {
+                valor: "JEEP",
+                copiado: false,
+              },
+              linha: {
+                valor: "COMPASS",
+                copiado: false,
+              },
+              motor: {
+                modelo: {
+                  valor: "TD350 Turbo Diesel",
+                  copiado: false,
+                },
+                cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                nro_cilindradas: {
+                  valor: "",
+                  copiado: false,
+                },
+                combustiveis: [
+                  {
+                    potencia: {
+                      valor: "170",
+                      copiado: false,
+                    },
+                    tipo_combustivel: {
+                      valor: "Diesel",
+                      copiado: false,
+                    },
+                  },
+                ],
+              },
+              carga: {
+                valor: "",
+                copiado: false,
+              },
+              num_passag: {
+                valor: "",
+                copiado: false,
+              },
+              num_portas: {
+                valor: "",
+                copiado: false,
+              },
+              num_renavam: {
+                valor: "",
+                copiado: false,
+              },
+              producao: {
+                valor: "",
+                copiado: false,
+              },
+              desc_vendas: {
+                valor: "",
+                copiado: false,
+              },
+            },
+          ]}
+        />
         <SaveButton variant="contained" color="primary">
           {t("view.saveButton")}
         </SaveButton>
-        <TabsView pdfList={mockPDFList} />
       </div>
       <GlobalStyle />
     </PageWrapper>

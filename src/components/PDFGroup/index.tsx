@@ -79,7 +79,7 @@ PDFGroupProps) => {
     }
     return PDFs.map((file) => (
       <PDFComponent
-        key={file.nome}
+        key={file.nome + file.ultimo_visto.toString()}
         fileName={file.nome}
         status={file.status}
         lastEditedAt={file.ultimo_visto.toString()}
