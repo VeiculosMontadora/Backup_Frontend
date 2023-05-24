@@ -17,7 +17,7 @@ export const PanelWrapper = styled.div`
   overflow-y: auto;
   padding: 6rem 2rem 1rem 2rem;
 
-  gap: 1rem;
+  gap: 3rem 2rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 

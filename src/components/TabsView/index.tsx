@@ -1,16 +1,26 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
 import { TabsWrapper, PanelWrapper } from "./styles"
-import { Veiculo } from "../PDFList/types"
+import { Veiculo } from "../../models/PDF"
 import InputComponent from "../InputData"
 
-const TabsView = ({ veiculos }: { veiculos: Veiculo[] }) => {
-  const [value, setValue] = useState(0)
+interface TabsViewProps {
+  veiculos: Veiculo[]
+}
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
+const TabsView = ({ veiculos }: TabsViewProps) => {
+  const [value, setValue] = useState<number>(0)
+  const [currentVehicle, setCurrentVehicle] = useState<Veiculo>({} as Veiculo)
+
+  useEffect(() => {
+    if (veiculos?.length > 0) setCurrentVehicle(veiculos[0])
+  }, [veiculos])
+
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue > veiculos.length - 1 ? 0 : newValue)
+    setCurrentVehicle(veiculos[newValue])
   }
 
   return (
@@ -45,12 +55,19 @@ const TabsView = ({ veiculos }: { veiculos: Veiculo[] }) => {
         </Tabs>
       </TabsWrapper>
       <PanelWrapper>
-        {Object.values(veiculos[value]).map((vehicle) => (
-          <InputComponent
-            key={vehicle.valor + Math.random()}
-            data={vehicle.valor}
-          />
-        ))}
+        {!veiculos.length
+          ? "Nenhum veículo selecionado"
+          : Object.values(currentVehicle).map((vehicle, index) => (
+              <InputComponent
+                key={vehicle.valor + Math.random()}
+                label={Object.keys(currentVehicle)
+                  [index].replace(/_/g, " ")
+                  .replace(/\w\S*/g, (w) =>
+                    w.replace(/^\w/, (c) => c.toUpperCase())
+                  )}
+                data={vehicle.valor}
+              />
+            ))}
       </PanelWrapper>
     </Box>
   )
