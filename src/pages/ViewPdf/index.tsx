@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { t } from "i18next"
 import { PageWrapper, SaveButton } from "./styles"
 import TabsView from "../../components/TabsView"
-import GlobalStyle from "../../styles/styles"
 import HomeButton from "../../components/HomeButton"
 import PDFList from "../../components/PDFList"
 import { PDF } from "../../components/PDFList/types"
+import GlobalStyle from "../../styles/styles"
 
 const mockPDFList = [
   {
@@ -79,7 +79,7 @@ const ViewPdf = () => {
   return (
     <PageWrapper>
       <HomeButton onClick={onHomeClick} />
-      <PDFList onPDFclick={onPDFclick} /* onPDFchange={onPDFchange} */ />
+      <PDFList /* onPDFclick={onPDFclick} onPDFchange={onPDFchange} */ />
       <div>
         <SaveButton variant="contained" color="primary">
           {t("view.saveButton")}

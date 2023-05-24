@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import PDFGroup from "../PDFGroup"
-import { PDFListProps, PDF } from "./types"
 import useGet from "../../hooks/useGet"
+import { PDF } from "./types"
 import Wrapper from "./styles"
 
-const PDFList = ({ onPDFclick /* , onPDFchange */ }: PDFListProps) => {
+const PDFList = () => {
   const { t } = useTranslation()
   const { get, result, loading } = useGet()
 
@@ -36,20 +36,20 @@ const PDFList = ({ onPDFclick /* , onPDFchange */ }: PDFListProps) => {
         PDFs={notOpened}
         defaultExpanded
         // onPDFchange={onPDFchange}
-        onPDFclick={onPDFclick}
+        // onPDFclick={onPDFclick}
         loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.incompleteFiles")}
         PDFs={incompletePDFs}
         // onPDFchange={onPDFchange}
-        onPDFclick={onPDFclick}
+        // onPDFclick={onPDFclick}
         loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.completeFiles")}
         PDFs={completePDFs}
-        onPDFclick={onPDFclick}
+        // onPDFclick={onPDFclick}
         loading={loading}
       />
     </Wrapper>

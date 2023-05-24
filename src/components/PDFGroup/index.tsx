@@ -9,6 +9,7 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary"
 import { PDF } from "../PDFList/types"
 import { LoadingIconSpin } from "../FileLoading"
+import PDFComponent from "../PDFComponent"
 import { Center, Title, AccordionDetails } from "./styles"
 
 const Accordion = styled((props: AccordionProps) => (
@@ -37,7 +38,7 @@ interface PDFGroupProps {
   PDFs: PDF[]
   defaultExpanded?: true
   /** Should move PDFs state to 'active' and to open editors tab */
-  onPDFclick: (PDF: PDF) => void
+  // onPDFclick: (PDF: PDF) => void
   /** Should move PDF to complete files tab
    * implemented by save button
    */
@@ -50,7 +51,7 @@ const PDFGroup = ({
   title,
   PDFs,
   defaultExpanded,
-  onPDFclick,
+  // onPDFclick,
   loading,
 }: // , onPDFchange
 PDFGroupProps) => {
@@ -77,22 +78,15 @@ PDFGroupProps) => {
       )
     }
     return PDFs.map((file) => (
-      <div
+      <PDFComponent
         key={file.nome}
-        style={{
-          width: "100%",
-          height: "50px",
-          border: "1px solid black",
-        }}
-        role="button"
-        tabIndex={0}
-        onKeyDown={() => onPDFclick({ ...file, status: "Concluído" })}
-        onClick={() => onPDFclick({ ...file, status: "Concluído" })}
-      >
-        {file.nome}
-      </div>
+        fileName={file.nome}
+        status={file.status}
+        lastEditedAt={file.ultimo_visto.toString()}
+        isSelected={false}
+      />
     ))
-  }, [PDFs, loading, onPDFclick, t])
+  }, [PDFs, loading, t])
 
   return (
     <Accordion

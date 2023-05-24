@@ -1,4 +1,4 @@
-export type PDFStatus = "Não aberto" | "Pendente" | "Concluído"
+export type PDFStatus = "nao aberto" | "pendente" | "concluido"
 
 export type PDF = {
   nome: string

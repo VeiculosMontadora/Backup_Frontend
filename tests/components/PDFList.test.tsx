@@ -8,24 +8,23 @@ describe("PDF List component", () => {
   const PDFs: PDF[] = [
     {
       nome: "PDF 1",
-      status: "Concluído",
+      status: "concluido",
       ultimo_visto: new Date(),
     },
     {
       nome: "Clique em mim!",
-      status: "Não aberto",
+      status: "nao aberto",
       ultimo_visto: new Date(),
     },
     {
       nome: "Não, em mim!",
-      status: "Pendente",
+      status: "pendente",
       ultimo_visto: new Date(),
     },
   ]
-  const onClick = (_: PDF) => {}
 
   beforeEach(() => {
-    render(<PDFList onPDFclick={onClick} />)
+    render(<PDFList />)
   })
 
   test("should render the PDF List component")
