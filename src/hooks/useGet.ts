@@ -5,29 +5,29 @@ const useGet = () => {
   const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const get = useCallback(
-    async (data: any) => {
-      if (loading) {
-        return
-      }
+  const get = useCallback(async () => {
+    if (loading) {
+      return
+    }
 
-      setLoading(true)
+    setLoading(true)
 
-      const dev = import.meta.env.DEV
-      const staticURL = dev
-        ? `${import.meta.env.VITE_LOCAL}/status?ids=`
-        : `${import.meta.env.VITE_PROD}/status?ids=`
+    const dev = import.meta.env.DEV
+    const staticURL = dev
+      ? `${import.meta.env.VITE_LOCAL}/pdfs/`
+      : `${import.meta.env.VITE_PROD}/pdfs/`
 
-      await fetch(staticURL, {
-        body: data,
-        method: "GET",
+    await fetch(staticURL, {
+      method: "GET",
+    })
+      .then(async (res) => {
+        setResult(await res.json())
       })
-        .then((res) => setResult(res))
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false))
-    },
-    [loading]
-  )
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false))
+  }, [loading])
+
+  // TODO: bring use effect call here
 
   return { get, result, loading, error }
 }

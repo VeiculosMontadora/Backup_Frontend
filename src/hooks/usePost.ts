@@ -4,8 +4,8 @@ import { Request } from "../pages/Home/types"
 const usePost = () => {
   const dev = import.meta.env.DEV
   const staticURL = dev
-    ? `${import.meta.env.VITE_LOCAL}upload/pdf/`
-    : `${import.meta.env.VITE_PROD}upload/pdf/`
+    ? `${import.meta.env.VITE_LOCAL}/pdfs/upload/`
+    : `${import.meta.env.VITE_PROD}/pdfs/upload/`
 
   const post = useCallback(
     (file: Request, setFiles: any) => {

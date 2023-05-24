@@ -7,25 +7,25 @@ import { PDF } from "../../src/components/PDFList/types"
 describe("PDF List component", () => {
   const PDFs: PDF[] = [
     {
-      name: "PDF 1",
+      nome: "PDF 1",
       status: "Concluído",
-      lastSeen: new Date(),
+      ultimo_visto: new Date(),
     },
     {
-      name: "Clique em mim!",
+      nome: "Clique em mim!",
       status: "Não aberto",
-      lastSeen: new Date(),
+      ultimo_visto: new Date(),
     },
     {
-      name: "Não, em mim!",
+      nome: "Não, em mim!",
       status: "Pendente",
-      lastSeen: new Date(),
+      ultimo_visto: new Date(),
     },
   ]
   const onClick = (_: PDF) => {}
 
   beforeEach(() => {
-    render(<PDFList PDFs={PDFs} onPDFclick={onClick} />)
+    render(<PDFList onPDFclick={onClick} />)
   })
 
   test("should render the PDF List component")

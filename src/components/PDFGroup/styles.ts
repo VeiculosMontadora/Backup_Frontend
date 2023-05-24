@@ -16,3 +16,8 @@ export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     marginTop: theme.spacing(2),
   },
 }))
+
+export const Center = styled_c.div`
+  display: flex;
+  justify-content: center;
+`
