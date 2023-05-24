@@ -7,10 +7,10 @@ import MuiAccordion, { AccordionProps } from "@mui/material/Accordion"
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary"
-import { PDF } from "../PDFList/types"
+import { Center, Title, AccordionDetails } from "./styles"
+import { PDF } from "../../models/PDF"
 import { LoadingIconSpin } from "../FileLoading"
 import PDFComponent from "../PDFComponent"
-import { Center, Title, AccordionDetails } from "./styles"
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion elevation={0} {...props} />
@@ -37,8 +37,9 @@ interface PDFGroupProps {
   title: string
   PDFs: PDF[]
   defaultExpanded?: true
+  selectedPdf: string
   /** Should move PDFs state to 'active' and to open editors tab */
-  // onPDFclick: (PDF: PDF) => void
+  onPDFclick: (fileName: string) => void
   /** Should move PDF to complete files tab
    * implemented by save button
    */
@@ -50,8 +51,9 @@ interface PDFGroupProps {
 const PDFGroup = ({
   title,
   PDFs,
+  selectedPdf,
   defaultExpanded,
-  // onPDFclick,
+  onPDFclick,
   loading,
 }: // , onPDFchange
 PDFGroupProps) => {
@@ -70,6 +72,7 @@ PDFGroupProps) => {
         </Center>
       )
     }
+
     if (!PDFs || PDFs.length === 0) {
       return (
         <Center>
@@ -77,16 +80,18 @@ PDFGroupProps) => {
         </Center>
       )
     }
+
     return PDFs.map((file) => (
       <PDFComponent
         key={file.nome + file.ultimo_visto.toString()}
         fileName={file.nome}
         status={file.status}
         lastEditedAt={file.ultimo_visto.toString()}
-        isSelected={false}
+        isSelected={selectedPdf === file.nome + file.ultimo_visto}
+        onClick={onPDFclick}
       />
     ))
-  }, [PDFs, loading, t])
+  }, [PDFs, loading, t, onPDFclick, selectedPdf])
 
   return (
     <Accordion

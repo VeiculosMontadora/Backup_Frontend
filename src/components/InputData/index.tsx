@@ -3,12 +3,14 @@ import TextField from "@mui/material/TextField"
 import { blue } from "@mui/material/colors"
 import { InputAdornment } from "@mui/material"
 import CopyInput from "../../assets/CopyInput.png"
+import Label from "./styles"
 
 type InputProps = {
+  label: string
   data?: string
 }
 
-function InputComponent({ data }: InputProps) {
+function InputComponent({ label, data }: InputProps) {
   const [value, setValue] = useState(data || "")
   // const [copied, setCopied] = useState(false)
   const [clicked, setClicked] = useState(false)
@@ -24,33 +26,38 @@ function InputComponent({ data }: InputProps) {
   }
 
   return (
-    <TextField
-      type="text"
-      value={data}
-      inputMode="text"
-      onChange={(event) => setValue(event.target.value)}
-      InputProps={{
-        style: {
-          backgroundColor: clicked ? blue[50] : "transparent",
-        },
-        onFocus: handleInputFocus,
-        endAdornment: (
-          <InputAdornment position="end">
-            <img
-              src={CopyInput}
-              alt="Copiar"
-              onClick={handleCopyClick}
-              onKeyDown={handleCopyClick}
-              style={{
-                cursor: "pointer",
-                marginLeft: "8px",
-                width: "30px",
-              }}
-            />
-          </InputAdornment>
-        ),
-      }}
-    />
+    <div style={{ position: "relative" }}>
+      <Label variant="h4">{label}</Label>
+      <TextField
+        type="text"
+        value={data}
+        inputMode="text"
+        onChange={(event) => setValue(event.target.value)}
+        onClick={handleCopyClick}
+        onKeyDown={handleCopyClick}
+        style={{ width: "100%" }}
+        InputProps={{
+          style: {
+            backgroundColor: clicked ? blue[50] : "transparent",
+          },
+          readOnly: true,
+          onFocus: handleInputFocus,
+          endAdornment: (
+            <InputAdornment position="end">
+              <img
+                src={CopyInput}
+                alt="Copiar"
+                style={{
+                  cursor: "pointer",
+                  marginLeft: "8px",
+                  width: "30px",
+                }}
+              />
+            </InputAdornment>
+          ),
+        }}
+      />
+    </div>
   )
 }
 

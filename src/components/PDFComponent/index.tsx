@@ -18,6 +18,7 @@ const PDFComponent = ({
   status,
   lastEditedAt,
   isSelected,
+  onClick,
 }: PDFComponentProps) => {
   const icon = useMemo(() => {
     switch (status) {
@@ -57,6 +58,7 @@ const PDFComponent = ({
       data-status={status}
       data-updated={handleDateUpdated()}
       data-selected={isSelected}
+      onClick={() => onClick(fileName)}
     >
       {icon}
       <Title variant="h2">{fileName}</Title>
