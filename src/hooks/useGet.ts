@@ -22,6 +22,9 @@ const useGet = () => {
     })
       .then(async (res) => {
         setResult(await res.json())
+        if (!localStorage.getItem("pdfs")) {
+          localStorage.setItem("pdfs", JSON.stringify(await res.json()))
+        }
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false))
