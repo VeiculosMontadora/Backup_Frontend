@@ -1,7 +1,9 @@
+import { useMemo } from "react"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import WarningIcon from "@mui/icons-material/Warning"
-import ContentPasteOffIcon from "@mui/icons-material/ContentPasteOff"
+import InfoIcon from "@mui/icons-material/Info"
 import FileDownloadIcon from "@mui/icons-material/FileDownload"
+import { PDFComponentProps } from "./types"
 import {
   Wrapper,
   Title,
@@ -10,59 +12,57 @@ import {
   NotOpenComponentWrapper,
   ExportFileWrapper,
 } from "./styles"
-import { PDFComponentProps, Status } from "./types"
 
-const ConcludedComponent = () => (
-  <ConcludedComponentWrapper>
-    <CheckCircleIcon />
-  </ConcludedComponentWrapper>
-)
-
-const UnfinishedComponent = () => (
-  <UnfinishedComponentWrapper>
-    <WarningIcon />
-  </UnfinishedComponentWrapper>
-)
-
-const NotOpenComponent = () => (
-  <NotOpenComponentWrapper>
-    <ContentPasteOffIcon />
-  </NotOpenComponentWrapper>
-)
-
-const ExportFile = () => (
-  <ExportFileWrapper>
-    <FileDownloadIcon />
-  </ExportFileWrapper>
-)
-
-const Icone = ({ status }: { status: Status }) => {
-  switch (status) {
-    case "concluded":
-      return <ConcludedComponent />
-    case "unfinished":
-      return <UnfinishedComponent />
-    case "notOpen":
-      return <NotOpenComponent />
-    default:
-      return <NotOpenComponent />
-  }
-}
 const PDFComponent = ({
   fileName,
   status,
   lastEditedAt,
   isSelected,
 }: PDFComponentProps) => {
+  const icon = useMemo(() => {
+    switch (status) {
+      case "concluido":
+        return (
+          <ConcludedComponentWrapper>
+            <CheckCircleIcon />
+          </ConcludedComponentWrapper>
+        )
+      case "pendente":
+        return (
+          <UnfinishedComponentWrapper>
+            <WarningIcon />
+          </UnfinishedComponentWrapper>
+        )
+      case "nao aberto":
+        return (
+          <NotOpenComponentWrapper>
+            <InfoIcon />
+          </NotOpenComponentWrapper>
+        )
+      default:
+        return null
+    }
+  }, [status])
+
+  const handleDateUpdated = () => {
+    // TODO: add font to lastEditedAt
+    if (lastEditedAt) {
+      return `Última edição em: ${lastEditedAt}`
+    }
+    return null
+  }
+
   return (
     <Wrapper
       data-status={status}
-      data-updated={`Última edição em: ${lastEditedAt}`}
+      data-updated={handleDateUpdated()}
       data-selected={isSelected}
     >
-      <Icone status={status} />
+      {icon}
       <Title variant="h2">{fileName}</Title>
-      <ExportFile />
+      <ExportFileWrapper>
+        <FileDownloadIcon />
+      </ExportFileWrapper>
     </Wrapper>
   )
 }

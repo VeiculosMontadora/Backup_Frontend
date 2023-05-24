@@ -1,4 +1,4 @@
-export type Status = "concluded" | "unfinished" | "notOpen"
+export type Status = "concluido" | "pendente" | "nao aberto"
 
 export type PDFComponentProps = {
   fileName: string
