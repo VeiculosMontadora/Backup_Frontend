@@ -5,4 +5,5 @@ export type PDFComponentProps = {
   status: Status
   isSelected: boolean
   lastEditedAt: string
+  onClick: (fileName: string) => void
 }

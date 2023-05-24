@@ -1,9 +1,15 @@
 import { useTranslation } from "react-i18next"
 import PDFGroup from "../PDFGroup"
-import { PDFListProps, PDF } from "./types"
 import Wrapper from "./styles"
+import { PDF } from "../../models/PDF"
+import { PDFListProps } from "./types"
 
-const PDFList = ({ result, loading }: PDFListProps) => {
+const PDFList = ({
+  result,
+  onPDFclick,
+  selectedPdf,
+  loading,
+}: PDFListProps) => {
   const { t } = useTranslation()
 
   const filterPDFs = () => {
@@ -29,18 +35,24 @@ const PDFList = ({ result, loading }: PDFListProps) => {
         title={t("viewPDF.pdfList.openEditors")}
         PDFs={notOpened}
         defaultExpanded
+        onPDFclick={onPDFclick}
+        selectedPdf={selectedPdf}
         // onPDFchange={onPDFchange}
         loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.incompleteFiles")}
         PDFs={incompletePDFs}
+        onPDFclick={onPDFclick}
+        selectedPdf={selectedPdf}
         // onPDFchange={onPDFchange}
         loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.completeFiles")}
         PDFs={completePDFs}
+        onPDFclick={onPDFclick}
+        selectedPdf={selectedPdf}
         loading={loading}
       />
     </Wrapper>
