@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 
 const useGet = () => {
-  const [result, setResult] = useState<any>(null)
+  const [result, setResult] = useState<any[]>([])
   const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
