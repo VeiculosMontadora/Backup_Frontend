@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { styled } from "@mui/material/styles"
 import { Typography } from "@material-ui/core"
@@ -7,8 +7,9 @@ import MuiAccordion, { AccordionProps } from "@mui/material/Accordion"
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary"
-import { Title, AccordionDetails } from "./styles"
 import { PDF } from "../PDFList/types"
+import { LoadingIconSpin } from "../FileLoading"
+import { Center, Title, AccordionDetails } from "./styles"
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion elevation={0} {...props} />
@@ -42,6 +43,7 @@ interface PDFGroupProps {
    */
   // TODO: implement
   // onPDFchange?: (PDF: PDF) => void
+  loading: boolean
 }
 
 const PDFGroup = ({
@@ -49,6 +51,7 @@ const PDFGroup = ({
   PDFs,
   defaultExpanded,
   onPDFclick,
+  loading,
 }: // , onPDFchange
 PDFGroupProps) => {
   const { t } = useTranslation()
@@ -57,6 +60,39 @@ PDFGroupProps) => {
   const toggleExpansion = () => {
     setIsExpanded((expanded) => !expanded)
   }
+
+  const pdfs = useMemo(() => {
+    if (loading) {
+      return (
+        <Center>
+          <LoadingIconSpin />
+        </Center>
+      )
+    }
+    if (!PDFs || PDFs.length === 0) {
+      return (
+        <Center>
+          <Typography>{t("viewPDF.pdfList.noFiles")}</Typography>
+        </Center>
+      )
+    }
+    return PDFs.map((file) => (
+      <div
+        key={file.nome}
+        style={{
+          width: "100%",
+          height: "50px",
+          border: "1px solid black",
+        }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={() => onPDFclick({ ...file, status: "Concluído" })}
+        onClick={() => onPDFclick({ ...file, status: "Concluído" })}
+      >
+        {file.nome}
+      </div>
+    ))
+  }, [PDFs, loading, onPDFclick, t])
 
   return (
     <Accordion
@@ -73,28 +109,7 @@ PDFGroupProps) => {
           {title}
         </Title>
       </AccordionSummary>
-      <AccordionDetails data-testid="pdf-group-body">
-        {!PDFs || PDFs.length === 0 ? (
-          <Typography>{t("viewPDF.pdfList.noFiles")}</Typography>
-        ) : (
-          PDFs.map((file) => (
-            <div
-              key={file.name}
-              style={{
-                width: "100%",
-                height: "50px",
-                border: "1px solid black",
-              }}
-              role="button"
-              tabIndex={0}
-              onKeyDown={() => onPDFclick({ ...file, status: "Concluído" })}
-              onClick={() => onPDFclick({ ...file, status: "Concluído" })}
-            >
-              {file.name}
-            </div>
-          ))
-        )}
-      </AccordionDetails>
+      <AccordionDetails data-testid="pdf-group-body">{pdfs}</AccordionDetails>
     </Accordion>
   )
 }

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { t } from "i18next"
 import { PageWrapper, SaveButton } from "./styles"
@@ -43,41 +42,26 @@ const ViewPdf = () => {
   const navigate = useNavigate()
 
   // TODO: remove PDFs; just placeholder
-  const [PDFs, setPDFs] = useState<PDF[]>([
-    {
-      name: "PDF 1",
-      status: "Concluído",
-      lastSeen: new Date(),
-    },
-    {
-      name: "Clique em mim!",
-      status: "Não aberto",
-      lastSeen: new Date(),
-    },
-    {
-      name: "Não, em mim!",
-      status: "Pendente",
-      lastSeen: new Date(),
-    },
-  ])
+  // const [PDFs, setPDFs] = useState<PDF[]>([])
 
   // TODO: Change to usePDFs hook
-  const { updateList } = {
-    // TODO: Update PDFs list on the hook (?) and remove this function
-    updateList: (updatedFile: PDF) => {
-      setPDFs((previousFiles) => {
-        const PDFIndex = previousFiles.findIndex(
-          ({ name }) => name === updatedFile.name
-        )
-        const newPDFs = [...previousFiles]
-        newPDFs[PDFIndex] = updatedFile
-        return newPDFs
-      })
-    },
-  } // = usePDFs()
+  // const { updateList } = {
+  //   // TODO: Update PDFs list on the hook (?) and remove this function
+  //   updateList: (updatedFile: PDF) => {
+  //     setPDFs((previousFiles) => {
+  //       const PDFIndex = previousFiles.findIndex(
+  //         ({ name }) => name === updatedFile.name
+  //       )
+  //       const newPDFs = [...previousFiles]
+  //       newPDFs[PDFIndex] = updatedFile
+  //       return newPDFs
+  //     })
+  //   },
+  // } // = usePDFs()
 
-  const onPDFclick = (file: PDF) => {
-    updateList(file)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const onPDFclick = (_file: PDF) => {
+    // updateList(file)
     // TODO?: maybe update routing
     // navigate(`/viewPDF/${PDF.name}`)
   }
@@ -95,10 +79,7 @@ const ViewPdf = () => {
   return (
     <PageWrapper>
       <HomeButton onClick={onHomeClick} />
-      <PDFList
-        PDFs={PDFs}
-        onPDFclick={onPDFclick} /* onPDFchange={onPDFchange} */
-      />
+      <PDFList onPDFclick={onPDFclick} /* onPDFchange={onPDFchange} */ />
       <div>
         <SaveButton variant="contained" color="primary">
           {t("view.saveButton")}
