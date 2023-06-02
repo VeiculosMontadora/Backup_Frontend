@@ -44,8 +44,10 @@ export const BoxAreaMessages = styled.div`
 export const BoxAreaTitle = styled(Typography).attrs((props: any) => ({
   type: props.type,
 }))`
-  font-size: 1rem !important;
-  font-weight: 700 !important;
+  && {
+    font-size: 1rem;
+    font-weight: 700;
+  }
 
   b {
     color: ${link};
@@ -55,17 +57,24 @@ export const BoxAreaTitle = styled(Typography).attrs((props: any) => ({
 
 export const BoxAreaSubtitle = styled(Typography)`
   display: flex;
-  font-size: 1rem !important;
-  font-weight: 400 !important;
   color: ${darkGray};
+  && {
+    font-size: 1rem;
+    font-weight: 400;
+  }
 `
 
 export const UploadIcon = styled(FileUploadIcon)`
-  height: 6rem !important;
-  width: 6rem !important;
+  && {
+    height: 6rem;
+    width: 6rem;
+  }
+
   color: ${link};
 
   @media screen and (max-height: 400px) {
-    display: none !important;
+    && {
+      display: none;
+    }
   }
 `

@@ -2,18 +2,18 @@ import { useCallback, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import useGet from "../../hooks/useGet"
+import HomeIcon from "../../assets/HomeIcon"
 import useDelete from "../../hooks/useDelete"
-import { PageWrapper, SaveButton } from "./styles"
-import GlobalStyle from "../../styles/styles"
 import { Veiculo } from "../../models/PDF"
-import HomeButton from "../../components/HomeButton"
 import PDFList from "../../components/PDFList"
 import TabsView from "../../components/TabsView"
+import GlobalStyle from "../../styles/styles"
+import { PageWrapper, SaveButton, HomeButton } from "./styles"
 
 const ViewPdf = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { get, result, loading, setResult } = useGet()
+  const { result, loading, setResult } = useGet({ init: true })
   const { deletePdf, pdfName } = useDelete()
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
   const [selectedPdf, setSelectedPdf] = useState<string>("")
@@ -44,17 +44,13 @@ const ViewPdf = () => {
 
   const onHomeClick = () => {
     navigate("/")
-    // TODO: Change to open modal
   }
-
-  useEffect(() => {
-    get()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <PageWrapper>
-      <HomeButton onClick={onHomeClick} />
+      <HomeButton onClick={onHomeClick} data-testid="home-button">
+        <HomeIcon />
+      </HomeButton>
       <PDFList
         result={result}
         onPDFclick={onPDFclick}

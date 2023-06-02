@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
-import { TabsWrapper, PanelWrapper } from "./styles"
-import { Veiculo } from "../../models/PDF"
+import Typography from "@mui/material/Typography/Typography"
 import InputComponent from "../InputData"
+import { Veiculo } from "../../models/PDF"
+import { TabsWrapper, PanelWrapper } from "./styles"
 
 interface TabsViewProps {
   veiculos: Veiculo[]
 }
 
 const TabsView = ({ veiculos }: TabsViewProps) => {
+  const { t } = useTranslation()
+
   const [value, setValue] = useState<number>(0)
   const [currentVehicle, setCurrentVehicle] = useState<Veiculo>({} as Veiculo)
 
@@ -55,19 +59,21 @@ const TabsView = ({ veiculos }: TabsViewProps) => {
         </Tabs>
       </TabsWrapper>
       <PanelWrapper>
-        {!veiculos.length
-          ? "Nenhum veículo selecionado"
-          : Object.values(currentVehicle).map((vehicle, index) => (
-              <InputComponent
-                key={vehicle.valor + Math.random()}
-                label={Object.keys(currentVehicle)
-                  [index].replace(/_/g, " ")
-                  .replace(/\w\S*/g, (w) =>
-                    w.replace(/^\w/, (c) => c.toUpperCase())
-                  )}
-                data={vehicle.valor}
-              />
-            ))}
+        {!veiculos.length ? (
+          <Typography>{t("viewPDF.tab.noSelectedVehicle")}</Typography>
+        ) : (
+          Object.values(currentVehicle).map((vehicle, index) => (
+            <InputComponent
+              key={vehicle.valor + Math.random()}
+              label={Object.keys(currentVehicle)
+                [index].replace(/_/g, " ")
+                .replace(/\w\S*/g, (w) =>
+                  w.replace(/^\w/, (c) => c.toUpperCase())
+                )}
+              data={vehicle.valor}
+            />
+          ))
+        )}
       </PanelWrapper>
     </Box>
   )

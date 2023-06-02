@@ -1,16 +1,16 @@
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { styled } from "@mui/material/styles"
-import { Typography } from "@material-ui/core"
+import { Typography } from "@mui/material"
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp"
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion"
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary"
-import { Center, Title, AccordionDetails } from "./styles"
 import { PDF } from "../../models/PDF"
 import { LoadingIconSpin } from "../FileLoading"
 import PDFComponent from "../PDFComponent"
+import { Center, Title, AccordionDetails } from "./styles"
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion elevation={0} {...props} />
@@ -38,7 +38,6 @@ interface PDFGroupProps {
   PDFs: PDF[]
   defaultExpanded?: true
   selectedPdf: string
-  /** Should move PDFs state to 'active' and to open editors tab */
   onPDFclick: (fileName: string) => void
   /** Should delete the given PDF by file name */
   onDeletePDF: (
@@ -56,8 +55,7 @@ const PDFGroup = ({
   onPDFclick,
   onDeletePDF,
   loading,
-}: // , onPDFchange
-PDFGroupProps) => {
+}: PDFGroupProps) => {
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState<boolean>(!!defaultExpanded)
 

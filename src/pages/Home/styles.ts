@@ -5,10 +5,13 @@ import { darkGray } from "../../styles/colors"
 export const SubTitle = styled(Typography)`
   justify-content: "flex-start";
   display: flex;
-  margin-bottom: 10px !important;
-  font-weight: 500 !important;
-  color: ${darkGray} !important;
-  font-size: 1rem !important;
+
+  && {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: ${darkGray};
+    font-size: 1rem;
+  }
 `
 
 export const FilesRow = styled.div`

@@ -2,12 +2,11 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import PDFGroup from "../../src/components/PDFGroup"
 import { act } from "react-dom/test-utils"
-import { PDF } from "../../src/components/PDFList/types"
 
 // TODO: Improve tests
 describe("PDFGroup component", () => {
   const title = "Editores Abertos"
-  const PDFs: PDF[] = [
+  const PDFs: any = [
     {
       nome: "PDF 1",
       status: "concluido",
@@ -30,25 +29,61 @@ describe("PDFGroup component", () => {
       veiculos: [],
     },
   ]
-  const onClick = (_: PDF) => {}
+  const onClick = (_) => {}
 
   test("should render component", () => {
-    render(<PDFGroup title={title} PDFs={PDFs} loading={false} />)
+    render(
+      <PDFGroup
+        title={title}
+        PDFs={PDFs}
+        loading={false}
+        selectedPdf={""}
+        onPDFclick={onClick} onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
+    )
     expect(screen.getByTestId("pdf-group-wrapper")).toBeInTheDocument()
   })
 
   test("should render title", () => {
-    render(<PDFGroup title={title} PDFs={[]} loading={false} />)
+    render(
+      <PDFGroup
+        title={title}
+        PDFs={[]}
+        loading={false}
+        selectedPdf={""}
+        onPDFclick={onClick} onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
+    )
     expect(screen.getByTestId("pdf-group-header-title")).toBeInTheDocument()
   })
 
   test("should render PDFs", () => {
-    render(<PDFGroup title={title} PDFs={PDFs} loading={false} />)
+    render(
+      <PDFGroup
+        title={title}
+        PDFs={PDFs}
+        loading={false}
+        selectedPdf={""}
+        onPDFclick={onClick} onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
+    )
     expect(screen.getByTestId("pdf-group-body")).toBeInTheDocument()
   })
 
   test("should render no pdfs message", () => {
-    render(<PDFGroup title={title} PDFs={[]} loading={false} />)
+    render(
+      <PDFGroup
+        title={title}
+        PDFs={[]}
+        loading={false}
+        selectedPdf={""}
+        onPDFclick={onClick} onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
+    )
     const pdfGroup = screen.getByTestId("pdf-group-body")
     expect(pdfGroup).toBeInTheDocument()
     expect(pdfGroup).toHaveTextContent("viewPDF.pdfList.noFiles")
@@ -61,18 +96,39 @@ describe("PDFGroup component", () => {
         PDFs={PDFs}
         defaultExpanded
         loading={false}
-      />
+        selectedPdf={""}
+        onPDFclick={onClick} onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
     )
     expect(screen.getByTestId("pdf-group-body")).toBeVisible()
   })
 
   test("should not be default opened", () => {
-    render(<PDFGroup title={title} PDFs={PDFs} loading={false} />)
+    render(
+      <PDFGroup
+        title={title}
+        PDFs={PDFs}
+        loading={false}
+        selectedPdf={""}
+        onPDFclick={onClick} onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
+    )
     expect(screen.getByTestId("pdf-group-body")).not.toBeVisible()
   })
 
   test("should be opened when clicked", () => {
-    render(<PDFGroup title={title} PDFs={PDFs} loading={false} />)
+    render(
+      <PDFGroup
+        title={title}
+        PDFs={PDFs}
+        loading={false}
+        selectedPdf={""}
+        onPDFclick={onClick} onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
+    )
     const pdfGroup = screen.getByTestId("pdf-group-body")
     expect(pdfGroup).not.toBeVisible()
     act(() => screen.getByTestId("pdf-group-header").click())

@@ -44,17 +44,23 @@ export const Wrapper = styled.div`
 `
 
 export const Title = styled(Typography)`
+  && {
+    font-size: 15px;
+    line-height: 27.8px;
+  }
+
   max-width: 40ch;
-  font-size: 15px !important;
-  line-height: 27.8px !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `
 
 export const Icon = styled.div`
-  font-size: 18.55px !important;
-  line-height: 27.8px !important;
+  && {
+    font-size: 18.55px;
+    line-height: 27.8px;
+  }
+
   position: absolute;
   top: -10px;
   left: -10px;

@@ -1,5 +1,5 @@
 import React from "react"
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import FileLoading from "../../src/components/FileLoading"
 
 describe("file loading component", () => {
@@ -59,12 +59,12 @@ describe("file loading component", () => {
       <FileLoading
         fileName="Test"
         status="downloaded"
-        handleDeleteClick={handleDeleteClick}
+        handleDeleteClick={() => handleDeleteClick(0)}
       />
     )
 
     const deleteButton = screen.getByTestId("delete-button")
-    deleteButton.click()
+    fireEvent.click(deleteButton)
     expect(uploadedFiles).toHaveLength(0)
   })
 })

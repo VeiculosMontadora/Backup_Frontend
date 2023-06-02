@@ -4,8 +4,8 @@ import InputLabel from "@mui/material/InputLabel"
 import FormControl from "@mui/material/FormControl"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
 import { DropdownProps } from "./types"
-import { DropdownArea, Item } from "./styles"
 import { lightGray, text } from "../../styles/colors"
+import { DropdownArea, Item } from "./styles"
 
 const Dropdown = ({ fileName, index, setUploadedFiles }: DropdownProps) => {
   const [carManufacturer, setCarManufacturer] = useState<string>("")
