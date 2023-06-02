@@ -40,11 +40,11 @@ interface PDFGroupProps {
   selectedPdf: string
   /** Should move PDFs state to 'active' and to open editors tab */
   onPDFclick: (fileName: string) => void
-  /** Should move PDF to complete files tab
-   * implemented by save button
-   */
-  // TODO: implement
-  // onPDFchange?: (PDF: PDF) => void
+  /** Should delete the given PDF by file name */
+  onDeletePDF: (
+    fileName: string,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void
   loading: boolean
 }
 
@@ -54,6 +54,7 @@ const PDFGroup = ({
   selectedPdf,
   defaultExpanded,
   onPDFclick,
+  onDeletePDF,
   loading,
 }: // , onPDFchange
 PDFGroupProps) => {
@@ -89,9 +90,10 @@ PDFGroupProps) => {
         lastEditedAt={file.ultimo_visto.toString()}
         isSelected={selectedPdf === file.nome + file.ultimo_visto}
         onClick={onPDFclick}
+        onDeletePDF={onDeletePDF}
       />
     ))
-  }, [PDFs, loading, t, onPDFclick, selectedPdf])
+  }, [PDFs, loading, t, onPDFclick, onDeletePDF, selectedPdf])
 
   return (
     <Accordion

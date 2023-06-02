@@ -3,6 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import WarningIcon from "@mui/icons-material/Warning"
 import InfoIcon from "@mui/icons-material/Info"
 import FileDownloadIcon from "@mui/icons-material/FileDownload"
+import DeleteIcon from "@mui/icons-material/Delete"
 import { PDFComponentProps } from "./types"
 import {
   Wrapper,
@@ -11,6 +12,7 @@ import {
   UnfinishedComponentWrapper,
   NotOpenComponentWrapper,
   ExportFileWrapper,
+  DeleteButton,
 } from "./styles"
 
 const PDFComponent = ({
@@ -19,6 +21,7 @@ const PDFComponent = ({
   lastEditedAt,
   isSelected,
   onClick,
+  onDeletePDF,
 }: PDFComponentProps) => {
   const icon = useMemo(() => {
     switch (status) {
@@ -64,6 +67,9 @@ const PDFComponent = ({
       <Title variant="h2">{fileName}</Title>
       <ExportFileWrapper>
         <FileDownloadIcon />
+        <DeleteButton onClick={(event) => onDeletePDF(fileName, event)}>
+          <DeleteIcon />
+        </DeleteButton>
       </ExportFileWrapper>
     </Wrapper>
   )

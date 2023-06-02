@@ -12,9 +12,10 @@ import {
 
 export const Wrapper = styled.div`
   display: flex;
+  gap: 15px;
   justify-content: space-between;
   position: relative;
-  padding: 15px 30px;
+  padding: 15px 15px;
   margin-bottom: 20px;
   background-color: ${superWhite};
   border-radius: 6.18px;
@@ -43,6 +44,7 @@ export const Wrapper = styled.div`
 `
 
 export const Title = styled(Typography)`
+  max-width: 40ch;
   font-size: 15px !important;
   line-height: 27.8px !important;
   overflow: hidden;
@@ -96,5 +98,23 @@ export const ExportFileWrapper = styled(Icon)`
 
   &:hover {
     cursor: pointer;
+  }
+`
+
+export const DeleteButton = styled.button`
+  border: 0;
+  background-color: transparent;
+  display: flex;
+
+  > svg {
+    fill: ${darkerGray};
+  }
+
+  &:hover {
+    border-radius: 5px;
+    cursor: pointer;
+    > svg {
+      fill: red;
+    }
   }
 `
