@@ -42,6 +42,9 @@
       "incompleteFiles": "Arquivos incompletos",
       "completeFiles": "Arquivos completos",
       "noFiles": "Nenhum arquivo encontrado"
+    },
+    "tab": {
+      "noSelectedVehicle": "Nenhum veículo selecionado"
     }
   }
 }

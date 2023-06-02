@@ -1,5 +1,3 @@
-import Button from "./styles"
-
 const HomeIcon = () => (
   <svg
     width="41"
@@ -27,14 +25,4 @@ const HomeIcon = () => (
   </svg>
 )
 
-interface HomeButtonProps {
-  onClick: () => void
-}
-
-const HomeButton = ({ onClick }: HomeButtonProps) => (
-  <Button onClick={onClick} data-testid="home-button">
-    <HomeIcon />
-  </Button>
-)
-
-export default HomeButton
+export default HomeIcon

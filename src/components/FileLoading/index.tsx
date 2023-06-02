@@ -1,16 +1,12 @@
+import { useMemo } from "react"
 import DeleteIcon from "@mui/icons-material/Delete"
 import CircularProgress, {
   circularProgressClasses,
 } from "@mui/material/CircularProgress"
 import LinearProgress from "@mui/material/LinearProgress"
-import {
-  DeleteComponentProps,
-  FileLoadingProps,
-  LoadingIconBarProps,
-  LoadingIconSpinProps,
-} from "./types"
-import { Wrapper, Title, DeleteButton } from "./styles"
+import { FileLoadingProps, LoadingIconSpinProps } from "./types"
 import { blue } from "../../styles/colors"
+import { Wrapper, Title, DeleteButton } from "./styles"
 
 // Infinitely spinning progress for file download
 export const LoadingIconSpin = ({
@@ -34,33 +30,37 @@ export const LoadingIconSpin = ({
   />
 )
 
-// Infinitely scrolling progress for file upload
-const LoadingIconBar = ({ isLoaded }: LoadingIconBarProps) => {
-  const variant = isLoaded ? "determinate" : "indeterminate"
-  return (
-    <div className="loading-icon-bar">
-      {/* value only affects the display if variant is indeterminate (infinite) */}
-      <LinearProgress variant={variant} value={100} />
-    </div>
-  )
-}
-
-const DeleteComponent = ({ index, handleClick }: DeleteComponentProps) => (
-  <DeleteButton data-testid="delete-button" onClick={() => handleClick(index)}>
-    <DeleteIcon />
-  </DeleteButton>
-)
-
 const FileLoading = ({
   fileName,
   status,
   isLoaded,
-  index = 0,
   handleDeleteClick,
 }: FileLoadingProps) => {
   const isSpin = status === "downloading"
   const isDeletable = status === "downloaded" && !!handleDeleteClick
   const isBar = status === "uploading"
+
+  // Infinitely scrolling progress for file upload
+  const loadingIconBar = useMemo(() => {
+    const variant = isLoaded ? "determinate" : "indeterminate"
+    return (
+      <div className="loading-icon-bar">
+        {/* value only affects the display if variant is indeterminate (infinite) */}
+        <LinearProgress variant={variant} value={100} />
+      </div>
+    )
+  }, [isLoaded])
+
+  const deleteComponent = useMemo(
+    () => (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      <DeleteButton data-testid="delete-button" onClick={handleDeleteClick}>
+        <DeleteIcon />
+      </DeleteButton>
+    ),
+    [handleDeleteClick]
+  )
 
   return (
     <Wrapper data-status={status} data-testid={status}>
@@ -68,10 +68,8 @@ const FileLoading = ({
         {fileName}
       </Title>
       {isSpin && <LoadingIconSpin />}
-      {isDeletable && (
-        <DeleteComponent index={index} handleClick={handleDeleteClick} />
-      )}
-      {isBar && <LoadingIconBar isLoaded={!!isLoaded} />}
+      {isDeletable && deleteComponent}
+      {isBar && loadingIconBar}
     </Wrapper>
   )
 }

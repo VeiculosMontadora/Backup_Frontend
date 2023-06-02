@@ -9,8 +9,11 @@ export const DropdownArea = styled.div`
 `
 
 export const Item = styled(MenuItem)`
-  background: ${superWhite} !important;
-  &:hover {
-    background: ${lightGray} !important;
+  && {
+    background: ${superWhite};
+  }
+
+  &&:hover {
+    background: ${lightGray};
   }
 `

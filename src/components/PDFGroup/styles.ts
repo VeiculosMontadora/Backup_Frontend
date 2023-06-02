@@ -1,14 +1,16 @@
+import styled from "styled-components"
+import { styled as style } from "@mui/material/styles"
 import MuiAccordionDetails from "@mui/material/AccordionDetails"
-import { Typography } from "@material-ui/core"
-import styled_c from "styled-components"
-import { styled } from "@mui/material/styles"
+import Typography from "@mui/material/Typography/Typography"
 
-export const Title = styled_c(Typography)`
-  font-weight: 400 !important;
-  font-size: 1.3rem !important;
+export const Title = styled(Typography)`
+  && {
+    font-weight: 400;
+    font-size: 1.3rem;
+  }
 `
 
-export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+export const AccordionDetails = style(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   display: "flex",
   flexDirection: "column",
@@ -17,7 +19,7 @@ export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   },
 }))
 
-export const Center = styled_c.div`
+export const Center = styled.div`
   display: flex;
   justify-content: center;
 `

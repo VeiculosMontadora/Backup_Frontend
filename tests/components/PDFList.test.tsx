@@ -1,11 +1,9 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
 import PDFList from "../../src/components/PDFList"
-import { PDF } from "../../src/components/PDFList/types"
 
-// TODO: Improve tests
 describe("PDF List component", () => {
-  const PDFs: PDF[] = [
+  const PDFs: any = [
     {
       nome: "PDF 1",
       status: "concluido",
@@ -30,7 +28,15 @@ describe("PDF List component", () => {
   ]
 
   beforeEach(() => {
-    render(<PDFList result={PDFs} loading={false} />)
+    render(
+      <PDFList
+        result={PDFs}
+        loading={false}
+        selectedPdf={""}
+        onPDFclick={(_) => { } } onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+          throw new Error("Function not implemented.")
+        } }      />
+    )
   })
 
   test("should render the PDF List component")

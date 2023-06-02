@@ -1,6 +1,10 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
-const useGet = () => {
+type GetProps = {
+  init?: boolean
+}
+
+const useGet = ({ init }: GetProps) => {
   const [result, setResult] = useState<any[]>([])
   const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
@@ -30,7 +34,12 @@ const useGet = () => {
       .finally(() => setLoading(false))
   }, [loading])
 
-  // TODO: bring use effect call here
+  useEffect(() => {
+    if (init) {
+      get()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [init])
 
   return { get, result, loading, error, setResult }
 }

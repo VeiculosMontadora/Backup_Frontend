@@ -6,13 +6,13 @@ import FileLoading from "../../components/FileLoading"
 import Button from "../../components/Button"
 import Dropdown from "../../components/Dropdown"
 import { PdfFile, Request } from "./types"
-import { SubTitle, FilesRow, SendButton } from "./styles"
 import GlobalStyle, {
   Container,
   Content,
   HeaderTitle,
   FilesWrapper,
 } from "../../styles/styles"
+import { SubTitle, FilesRow, SendButton } from "./styles"
 
 const Home = () => {
   const [uploadedFiles, setUploadedFiles] = useState<PdfFile[]>([])

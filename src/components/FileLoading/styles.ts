@@ -45,7 +45,6 @@ export const Wrapper = styled.div`
 `
 
 export const DeleteButton = styled.button`
-  /* Default button reset */
   border: 0;
   outline: 0;
 
@@ -75,8 +74,11 @@ export const DeleteButton = styled.button`
 `
 
 export const Title = styled(Typography)`
-  font-size: 18.55px !important;
-  line-height: 27.8px !important;
+  && {
+    font-size: 18.55px;
+    line-height: 27.8px;
+  }
+
   color: ${text};
   overflow: hidden;
   text-overflow: ellipsis;

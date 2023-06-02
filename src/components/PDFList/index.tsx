@@ -1,8 +1,9 @@
+import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import PDFGroup from "../PDFGroup"
-import Wrapper from "./styles"
 import { PDF } from "../../models/PDF"
 import { PDFListProps } from "./types"
+import Wrapper from "./styles"
 
 const PDFList = ({
   result,
@@ -13,7 +14,7 @@ const PDFList = ({
 }: PDFListProps) => {
   const { t } = useTranslation()
 
-  const filterPDFs = () => {
+  const filterPDFs = useMemo(() => {
     if (!result.forEach) return [[], [], []]
 
     const notOpened: PDF[] = []
@@ -27,8 +28,9 @@ const PDFList = ({
     })
 
     return [notOpened, incompletePDFs, completePDFs]
-  }
-  const [notOpened, incompletePDFs, completePDFs] = filterPDFs()
+  }, [result])
+
+  const [notOpened, incompletePDFs, completePDFs] = filterPDFs
 
   return (
     <Wrapper>

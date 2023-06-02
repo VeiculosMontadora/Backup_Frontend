@@ -21,8 +21,11 @@ export const LoadingWrapper = styled.div`
   margin-bottom: 1rem;
 `
 export const Title = styled(Typography)`
-  font-size: 1.4rem !important;
-  font-weight: 550 !important;
+  && {
+    font-size: 1.4rem;
+    font-weight: 550;
+  }
+
   &[data-progress="success"] {
     color: ${green};
   }

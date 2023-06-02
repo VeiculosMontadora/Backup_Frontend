@@ -2,7 +2,7 @@ import { useState } from "react"
 import TextField from "@mui/material/TextField"
 import { blue } from "@mui/material/colors"
 import { InputAdornment } from "@mui/material"
-import CopyInput from "../../assets/CopyInput.png"
+import CopyInput from "../../assets/images/CopyInput.png"
 import Label from "./styles"
 
 type InputProps = {

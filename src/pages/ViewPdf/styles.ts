@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Button } from "@mui/material"
-import { backgroundBlue } from "../../styles/colors"
+import { backgroundBlue, buttonBlue } from "../../styles/colors"
 
 export const PageWrapper = styled.div`
   height: 100%;
@@ -47,7 +47,10 @@ export const PageWrapper = styled.div`
 `
 
 export const SaveButton = styled(Button)`
-  position: absolute !important;
+  && {
+    position: absolute;
+  }
+
   top: 130px;
   right: 110px;
   width: 100px;
@@ -62,3 +65,29 @@ export const SaveButton = styled(Button)`
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
   }
 `
+
+export const HomeButton = styled.button`
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  left: 25px;
+  top: 25px;
+
+  background-color: ${buttonBlue};
+  border-radius: 50px;
+  outline: 0;
+  border: 0;
+
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  svg {
+    width: 67.5%;
+  }
+`
+
+export default Button
