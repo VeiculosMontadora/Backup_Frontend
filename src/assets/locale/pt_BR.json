@@ -24,7 +24,8 @@
   "extraction": {
     "extracting": "Fazendo a extração de dados...",
     "success": "Extração concluída!",
-    "fail": "Erro na extração!"
+    "fail": "Erro na extração!",
+    "partialFail": "Um ou mais pdf's deram erro."
   },
   "notFound": {
     "title": "404",

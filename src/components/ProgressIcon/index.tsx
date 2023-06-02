@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { LoadingIconSpin } from "../FileLoading"
 import Success from "../../assets/Loaded"
 import Failed from "../../assets/Failed"
+import PartialFailed from "../../assets/PartialFailed"
 import { ProgressProps } from "./types"
 import { Wrapper, IconWrapper, Title, LoadingWrapper } from "./styles"
 
@@ -14,19 +15,23 @@ const ProgressIcon = ({ progress }: ProgressProps) => {
   }, [progress, t])
 
   const image = useMemo(() => {
-    if (progress === "success") {
-      return <Success />
-    }
+    switch (progress) {
+      case "success":
+        return <Success />
 
-    if (progress === "fail") {
-      return <Failed />
-    }
+      case "partialFail":
+        return <PartialFailed />
 
-    return (
-      <LoadingWrapper>
-        <LoadingIconSpin size={60} thickness={5.4} />
-      </LoadingWrapper>
-    )
+      case "fail":
+        return <Failed />
+
+      default:
+        return (
+          <LoadingWrapper>
+            <LoadingIconSpin size={60} thickness={5.4} />
+          </LoadingWrapper>
+        )
+    }
   }, [progress])
 
   return (
