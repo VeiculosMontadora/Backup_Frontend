@@ -7,6 +7,7 @@ import { PDFListProps } from "./types"
 const PDFList = ({
   result,
   onPDFclick,
+  onDeletePDF,
   selectedPdf,
   loading,
 }: PDFListProps) => {
@@ -36,22 +37,23 @@ const PDFList = ({
         PDFs={notOpened}
         defaultExpanded
         onPDFclick={onPDFclick}
+        onDeletePDF={onDeletePDF}
         selectedPdf={selectedPdf}
-        // onPDFchange={onPDFchange}
         loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.incompleteFiles")}
         PDFs={incompletePDFs}
         onPDFclick={onPDFclick}
+        onDeletePDF={onDeletePDF}
         selectedPdf={selectedPdf}
-        // onPDFchange={onPDFchange}
         loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.completeFiles")}
         PDFs={completePDFs}
         onPDFclick={onPDFclick}
+        onDeletePDF={onDeletePDF}
         selectedPdf={selectedPdf}
         loading={loading}
       />

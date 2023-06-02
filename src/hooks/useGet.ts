@@ -32,7 +32,7 @@ const useGet = () => {
 
   // TODO: bring use effect call here
 
-  return { get, result, loading, error }
+  return { get, result, loading, error, setResult }
 }
 
 export default useGet

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import useGet from "../../hooks/useGet"
+import useDelete from "../../hooks/useDelete"
 import { PageWrapper, SaveButton } from "./styles"
 import GlobalStyle from "../../styles/styles"
 import { Veiculo } from "../../models/PDF"
@@ -12,7 +13,8 @@ import TabsView from "../../components/TabsView"
 const ViewPdf = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { get, result, loading } = useGet()
+  const { get, result, loading, setResult } = useGet()
+  const { deletePdf, pdfName } = useDelete()
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
   const [selectedPdf, setSelectedPdf] = useState<string>("")
 
@@ -23,10 +25,22 @@ const ViewPdf = () => {
     setVeiculos(file.veiculos || [])
   }
 
-  // TODO: Change to usePDFs hook
-  /* const onPDFchange = (file: PDF) => {
-    updateList(file)
-  } */
+  const onDeletePDF = useCallback(
+    (fileName: string, event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation()
+      // eslint-disable-next-line no-alert
+      if (!window.confirm("Tem certeza que quer deletar?")) return
+      deletePdf(fileName)
+    },
+    [deletePdf]
+  )
+
+  useEffect(() => {
+    if (result.find((arq) => arq.nome === pdfName)) {
+      const newResult = result.filter(({ nome }) => nome !== pdfName)
+      setResult(newResult)
+    }
+  }, [pdfName, result, setResult])
 
   const onHomeClick = () => {
     navigate("/")
@@ -44,6 +58,7 @@ const ViewPdf = () => {
       <PDFList
         result={result}
         onPDFclick={onPDFclick}
+        onDeletePDF={onDeletePDF}
         selectedPdf={selectedPdf}
         loading={loading}
       />
