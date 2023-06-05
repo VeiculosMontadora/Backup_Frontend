@@ -12,8 +12,8 @@ describe("view pdf page", () => {
     )
   })
 
-  test("should render return to home button", () => {
-    const button = screen.getByTestId("home-button")
+  test("should render go to upload page button", () => {
+    const button = screen.getByTestId("upload-button")
     expect(button).toBeVisible()
   })
 })

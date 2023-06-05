@@ -1,18 +1,16 @@
 import { useCallback, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import useGet from "../../hooks/useGet"
-import HomeIcon from "../../assets/HomeIcon"
+import UploadIcon from "../../assets/images/UploadIcon.svg"
 import useDelete from "../../hooks/useDelete"
 import { Veiculo } from "../../models/PDF"
 import PDFList from "../../components/PDFList"
 import TabsView from "../../components/TabsView"
 import GlobalStyle from "../../styles/styles"
-import { PageWrapper, SaveButton, HomeButton } from "./styles"
+import { PageWrapper, SaveButton, UploadButton } from "./styles"
 
 const ViewPdf = () => {
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const { result, loading, setResult } = useGet({ init: true })
   const { deletePdf, pdfName } = useDelete()
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
@@ -42,15 +40,11 @@ const ViewPdf = () => {
     }
   }, [pdfName, result, setResult])
 
-  const onHomeClick = () => {
-    navigate("/")
-  }
-
   return (
     <PageWrapper>
-      <HomeButton onClick={onHomeClick} data-testid="home-button">
-        <HomeIcon />
-      </HomeButton>
+      <UploadButton to="/" data-testid="upload-button">
+        <img src={UploadIcon} alt="Ir para a página de envio de pdf" />
+      </UploadButton>
       <PDFList
         result={result}
         onPDFclick={onPDFclick}
