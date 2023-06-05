@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Button } from "@mui/material"
+import { Link } from "react-router-dom"
 import { backgroundBlue, buttonBlue } from "../../styles/colors"
 
 export const PageWrapper = styled.div`
@@ -66,7 +67,7 @@ export const SaveButton = styled(Button)`
   }
 `
 
-export const HomeButton = styled.button`
+export const UploadButton = styled(Link)`
   position: absolute;
   width: 55px;
   height: 55px;
@@ -77,6 +78,9 @@ export const HomeButton = styled.button`
   border-radius: 50px;
   outline: 0;
   border: 0;
+
+  display: grid;
+  place-items: center;
 
   &:hover,
   &:focus,
