@@ -1,7 +1,14 @@
 import { Typography } from "@mui/material"
 import styled from "styled-components"
+import TextField from "@mui/material/TextField"
 
-const Label = styled(Typography)`
+export const StyledInput = styled(TextField)`
+  .MuiOutlinedInput-input {
+    cursor: ${({ cursor }: { cursor: "pointer" | "auto" }) => cursor};
+  }
+`
+
+export const Label = styled(Typography)`
   && {
     font-size: 1.2rem;
   }
@@ -10,5 +17,3 @@ const Label = styled(Typography)`
   top: -22.5px;
   left: 5px;
 `
-
-export default Label
