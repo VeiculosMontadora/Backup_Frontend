@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
+import Arrow from "@mui/icons-material/ArrowCircleRight"
 import Typography from "@mui/material/Typography/Typography"
 import InputComponent from "../InputData"
 import { Veiculo } from "../../models/PDF"
-import { TabsWrapper, PanelWrapper } from "./styles"
+import { TabsWrapper, PanelWrapper, ArrowsBar, ArrowWrapper } from "./styles"
 
 interface TabsViewProps {
   veiculos: Veiculo[]
@@ -19,7 +20,10 @@ const TabsView = ({ veiculos }: TabsViewProps) => {
   const [currentVehicle, setCurrentVehicle] = useState<Veiculo>({} as Veiculo)
 
   useEffect(() => {
-    if (veiculos?.length > 0) setCurrentVehicle(veiculos[0])
+    if (veiculos?.length > 0) {
+      setCurrentVehicle(veiculos[0])
+      setValue(0)
+    }
   }, [veiculos])
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -37,6 +41,34 @@ const TabsView = ({ veiculos }: TabsViewProps) => {
       }}
     >
       <TabsWrapper position="static">
+        <ArrowsBar>
+          {!!veiculos.length && (
+            <ArrowsBar>
+              <ArrowWrapper>
+                <Arrow
+                  color="primary"
+                  style={{ transform: "rotate(180deg)" }}
+                  onClick={() => {
+                    const newValue = value - 1 < 0 ? 0 : value - 1
+                    setValue(newValue)
+                    setCurrentVehicle(veiculos[newValue])
+                  }}
+                />
+              </ArrowWrapper>
+              <ArrowWrapper>
+                <Arrow
+                  color="primary"
+                  onClick={() => {
+                    const newValue =
+                      value === veiculos.length - 1 ? value : value + 1
+                    setValue(newValue)
+                    setCurrentVehicle(veiculos[newValue])
+                  }}
+                />
+              </ArrowWrapper>
+            </ArrowsBar>
+          )}
+        </ArrowsBar>
         <Tabs
           value={value}
           onChange={handleChange}

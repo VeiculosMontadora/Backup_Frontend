@@ -33,9 +33,14 @@ describe("PDF List component", () => {
         result={PDFs}
         loading={false}
         selectedPdf={""}
-        onPDFclick={(_) => { } } onDeletePDF={function (fileName: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+        onPDFclick={(_) => {}}
+        onDeletePDF={function (
+          fileName: string,
+          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+        ): void {
           throw new Error("Function not implemented.")
-        } }      />
+        }}
+      />
     )
   })
 
