@@ -25,3 +25,20 @@ export const PanelWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 `
+
+export const ArrowsBar = styled.div`
+  display: flex;
+  flex: 1;
+`
+
+export const ArrowWrapper = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: fill 0.3s;
+  &:hover {
+    > svg {
+      fill: ${superWhite};
+    }
+  }
+`
