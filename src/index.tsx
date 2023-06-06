@@ -10,14 +10,17 @@ import "@fontsource/roboto/500.css"
 import "@fontsource/roboto/700.css"
 import "./hooks/useI18n"
 import "./styles/styles"
+import { ViewPDFProvider } from "./contexts/ViewPDF.context"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/process" element={<Process />} />
-      <Route path="/view" element={<ViewPdf />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <ViewPDFProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/process" element={<Process />} />
+        <Route path="/view" element={<ViewPdf />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </ViewPDFProvider>
   </BrowserRouter>
 )

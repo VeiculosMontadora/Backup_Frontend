@@ -5,10 +5,4 @@ export type PDFComponentProps = {
   status: Status
   isSelected: boolean
   lastEditedAt: string
-  onClick: (fileName: string) => void
-  /** Should delete the given PDF by file name */
-  onDeletePDF: (
-    fileName: string,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void
 }

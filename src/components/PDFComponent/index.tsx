@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useContext, useMemo } from "react"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import WarningIcon from "@mui/icons-material/Warning"
 import InfoIcon from "@mui/icons-material/Info"
@@ -14,15 +14,16 @@ import {
   ExportFileWrapper,
   DeleteButton,
 } from "./styles"
+import { ViewPDFContext } from "../../contexts/ViewPDF.context"
 
 const PDFComponent = ({
   fileName,
   status,
   lastEditedAt,
   isSelected,
-  onClick,
-  onDeletePDF,
 }: PDFComponentProps) => {
+  const { onPDFclick, onDeletePDF } = useContext(ViewPDFContext)
+
   const icon = useMemo(() => {
     switch (status) {
       case "concluido":
@@ -61,7 +62,7 @@ const PDFComponent = ({
       data-status={status}
       data-updated={handleDateUpdated()}
       data-selected={isSelected}
-      onClick={() => onClick(fileName)}
+      onClick={() => onPDFclick(fileName)}
     >
       {icon}
       <Title variant="h2">{fileName}</Title>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useContext, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { styled } from "@mui/material/styles"
 import { Typography } from "@mui/material"
@@ -11,6 +11,7 @@ import { PDF } from "../../models/PDF"
 import { LoadingIconSpin } from "../FileLoading"
 import PDFComponent from "../PDFComponent"
 import { Center, Title, AccordionDetails } from "./styles"
+import { ViewPDFContext } from "../../contexts/ViewPDF.context"
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion elevation={0} {...props} />
@@ -37,26 +38,12 @@ interface PDFGroupProps {
   title: string
   PDFs: PDF[]
   defaultExpanded?: true
-  selectedPdf: string
-  onPDFclick: (fileName: string) => void
-  /** Should delete the given PDF by file name */
-  onDeletePDF: (
-    fileName: string,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void
-  loading: boolean
 }
 
-const PDFGroup = ({
-  title,
-  PDFs,
-  selectedPdf,
-  defaultExpanded,
-  onPDFclick,
-  onDeletePDF,
-  loading,
-}: PDFGroupProps) => {
+const PDFGroup = ({ title, PDFs, defaultExpanded }: PDFGroupProps) => {
   const { t } = useTranslation()
+  const { selectedPdf, loading } = useContext(ViewPDFContext)
+
   const [isExpanded, setIsExpanded] = useState<boolean>(!!defaultExpanded)
 
   const toggleExpansion = () => {
@@ -87,11 +74,9 @@ const PDFGroup = ({
         status={file.status}
         lastEditedAt={file.ultimo_visto.toString()}
         isSelected={selectedPdf === file.nome + file.ultimo_visto}
-        onClick={onPDFclick}
-        onDeletePDF={onDeletePDF}
       />
     ))
-  }, [PDFs, loading, t, onPDFclick, onDeletePDF, selectedPdf])
+  }, [t, loading, selectedPdf, PDFs])
 
   return (
     <Accordion
