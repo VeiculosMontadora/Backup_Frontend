@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
@@ -7,14 +7,12 @@ import Arrow from "@mui/icons-material/ArrowCircleRight"
 import Typography from "@mui/material/Typography/Typography"
 import InputComponent from "../InputData"
 import { Veiculo } from "../../models/PDF"
+import { ViewPDFContext } from "../../contexts/ViewPDF.context"
 import { TabsWrapper, PanelWrapper, ArrowsBar, ArrowWrapper } from "./styles"
 
-interface TabsViewProps {
-  veiculos: Veiculo[]
-}
-
-const TabsView = ({ veiculos }: TabsViewProps) => {
+const TabsView = () => {
   const { t } = useTranslation()
+  const { veiculos } = useContext(ViewPDFContext)
 
   const [value, setValue] = useState<number>(0)
   const [currentVehicle, setCurrentVehicle] = useState<Veiculo>({} as Veiculo)
@@ -42,7 +40,7 @@ const TabsView = ({ veiculos }: TabsViewProps) => {
     >
       <TabsWrapper position="static">
         <ArrowsBar>
-          {!!veiculos.length && (
+          {!!veiculos?.length && (
             <ArrowsBar>
               <ArrowWrapper>
                 <Arrow
@@ -77,7 +75,7 @@ const TabsView = ({ veiculos }: TabsViewProps) => {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          {veiculos.map(({ desc_cat: { valor } }, index) => (
+          {veiculos?.map(({ desc_cat: { valor } }, index) => (
             <Tab
               key={valor}
               style={
@@ -91,7 +89,7 @@ const TabsView = ({ veiculos }: TabsViewProps) => {
         </Tabs>
       </TabsWrapper>
       <PanelWrapper>
-        {!veiculos.length ? (
+        {!veiculos?.length ? (
           <Typography>{t("viewPDF.tab.noSelectedVehicle")}</Typography>
         ) : (
           Object.values(currentVehicle).map((vehicle, index) => (

@@ -1,21 +1,16 @@
-import { useMemo } from "react"
+import { useContext, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import PDFGroup from "../PDFGroup"
 import { PDF } from "../../models/PDF"
-import { PDFListProps } from "./types"
 import Wrapper from "./styles"
+import { ViewPDFContext } from "../../contexts/ViewPDF.context"
 
-const PDFList = ({
-  result,
-  onPDFclick,
-  onDeletePDF,
-  selectedPdf,
-  loading,
-}: PDFListProps) => {
+const PDFList = () => {
   const { t } = useTranslation()
+  const { result } = useContext(ViewPDFContext)
 
   const filterPDFs = useMemo(() => {
-    if (!result.forEach) return [[], [], []]
+    if (!result?.forEach) return [[], [], []]
 
     const notOpened: PDF[] = []
     const incompletePDFs: PDF[] = []
@@ -38,26 +33,14 @@ const PDFList = ({
         title={t("viewPDF.pdfList.openEditors")}
         PDFs={notOpened}
         defaultExpanded
-        onPDFclick={onPDFclick}
-        onDeletePDF={onDeletePDF}
-        selectedPdf={selectedPdf}
-        loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.incompleteFiles")}
         PDFs={incompletePDFs}
-        onPDFclick={onPDFclick}
-        onDeletePDF={onDeletePDF}
-        selectedPdf={selectedPdf}
-        loading={loading}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.completeFiles")}
         PDFs={completePDFs}
-        onPDFclick={onPDFclick}
-        onDeletePDF={onDeletePDF}
-        selectedPdf={selectedPdf}
-        loading={loading}
       />
     </Wrapper>
   )

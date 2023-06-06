@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 
 const useDelete = () => {
-  const [pdfName, setPdfName] = useState()
+  const [pdfName, setPdfName] = useState<string>("")
   const dev = import.meta.env.DEV
   const staticURL = dev
     ? `${import.meta.env.VITE_LOCAL}/pdfs/`
