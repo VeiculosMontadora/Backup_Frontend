@@ -17,6 +17,7 @@ interface IViewPDFContext {
   result: any[]
   loading: boolean
   setResult: Dispatch<SetStateAction<any[]>>
+  get: any
   deletePdf: (fileName: string) => Promise<void>
   pdfName: string
   veiculos: Veiculo[]
@@ -32,7 +33,7 @@ export const ViewPDFContext = createContext<IViewPDFContext>(
 )
 
 export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
-  const { result, loading, setResult } = useGet({ init: true })
+  const { result, loading, setResult, get } = useGet()
   const { deletePdf, pdfName } = useDelete()
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
   const [selectedPdf, setSelectedPdf] = useState<string>("")
@@ -69,6 +70,7 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
       result,
       loading,
       setResult,
+      get,
       deletePdf,
       pdfName,
       veiculos,
@@ -82,6 +84,7 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
       result,
       loading,
       setResult,
+      get,
       deletePdf,
       pdfName,
       veiculos,
