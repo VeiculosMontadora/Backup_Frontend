@@ -74,6 +74,7 @@ const TabsView = () => {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
+          data-testid="tabs-wrapper"
         >
           {veiculos?.map(({ desc_cat: { valor } }, index) => (
             <Tab
