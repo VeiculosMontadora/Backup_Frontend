@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 
-type GetProps = {
-  init?: boolean
-}
-
-const useGet = ({ init }: GetProps) => {
+const useGet = () => {
   const [result, setResult] = useState<any[]>([])
   const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
@@ -35,11 +31,9 @@ const useGet = ({ init }: GetProps) => {
   }, [loading])
 
   useEffect(() => {
-    if (init) {
-      get()
-    }
+    get()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [init])
+  }, [])
 
   return { get, result, loading, error, setResult }
 }
