@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import { backgroundBlue, buttonBlue } from "../../styles/colors"
 
 export const PageWrapper = styled.div`
-  height: 100%;
   position: relative;
   gap: 1rem;
   display: flex;

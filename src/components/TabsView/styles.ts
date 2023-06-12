@@ -19,11 +19,28 @@ export const TabsWrapper = styled(AppBar)`
 export const PanelWrapper = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: 6rem 2rem 1rem 2rem;
+  padding: 6rem 2rem 3rem 2rem;
 
-  gap: 3rem 2rem;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+`
+
+const ItemRow = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+`
+
+export const TwoItemsRows = styled(ItemRow)`
+  grid-template-columns: 20% 75%;
+`
+
+export const ThreeItemsRows = styled(ItemRow)`
+  grid-template-columns: 20% 35% 35%;
+`
+
+export const FiveItemsRows = styled(ItemRow)`
+  grid-template-columns: 20% 15% 15% 15% 15%;
 `
 
 export const ArrowsBar = styled.div`

@@ -3,6 +3,10 @@ import styled from "styled-components"
 import TextField from "@mui/material/TextField"
 
 export const StyledInput = styled(TextField)`
+  && {
+    width: 100%;
+  }
+
   .MuiOutlinedInput-input {
     cursor: ${({ cursor }: { cursor: "pointer" | "auto" }) => cursor};
   }
@@ -10,7 +14,8 @@ export const StyledInput = styled(TextField)`
 
 export const Label = styled(Typography)`
   && {
-    font-size: 1.2rem;
+    font-size: ${(props: { small: boolean }) =>
+      props.small ? ".87rem" : "1rem"};
   }
 
   position: absolute;
