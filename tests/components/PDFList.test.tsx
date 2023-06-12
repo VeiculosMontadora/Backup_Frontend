@@ -4,9 +4,7 @@ import PDFList from "../../src/components/PDFList"
 
 describe("PDF List component", () => {
   beforeEach(() => {
-    render(
-      <PDFList />
-    )
+    render(<PDFList />)
   })
 
   test("should render the PDF List component")

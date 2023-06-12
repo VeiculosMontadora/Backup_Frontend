@@ -45,6 +45,37 @@
     },
     "tab": {
       "noSelectedVehicle": "Nenhum veículo selecionado"
+    },
+    "input": {
+      "model": "Modelo",
+      "descRenavan": "Desc Renavan",
+      "descCat": "Descrição",
+      "acronym": "Sigla",
+      "descModelo": "Pacote Def. Modelo",
+      "versao": "Versão",
+      "ano": "Ano",
+      "marca": "Marca",
+      "linha": "Linha",
+      "carrocaria": "Carroçaria",
+      "segmento": "Segmento",
+      "motor": "Motor",
+      "cilindradas": "Cilindradas",
+      "nroCilindros": "Nro Cilindros",
+      "potencia": "Potência",
+      "tipoCombustivel": "Tipo Combustível",
+      "freteEspecfico": "Frete Específico",
+      "valor": "Valor",
+      "potencia1": "Potência1",
+      "carga": "Carga",
+      "numPassag": "Num Passag",
+      "numPortas": "Num Portas",
+      "numRenavam": "Num do Renavam",
+      "especie": "Espécie",
+      "linhaServico": "Linha de Serviço",
+      "codFIPE": "Código FIPE",
+      "aliqIPI": "Aliq IPI",
+      "prazoGarantia": "Prazo Garantia",
+      "kmGarantia": "Km Garantia"
     }
   }
 }
