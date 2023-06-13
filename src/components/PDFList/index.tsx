@@ -4,10 +4,12 @@ import PDFGroup from "../PDFGroup"
 import { PDF } from "../../models/PDF"
 import Wrapper from "./styles"
 import { ViewPDFContext } from "../../contexts/ViewPDF.context"
+import useGet from "../../hooks/useGet"
 
 const PDFList = () => {
   const { t } = useTranslation()
-  const { result, get } = useContext(ViewPDFContext)
+  const { result } = useContext(ViewPDFContext)
+  const { get } = useGet()
 
   const filterPDFs = useMemo(() => {
     if (!result?.forEach) return [[], [], []]
