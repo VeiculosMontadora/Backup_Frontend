@@ -106,6 +106,23 @@ export const ExportFileWrapper = styled(Icon)`
     cursor: pointer;
   }
 `
+export const ExportButton = styled.button`
+  border: 0;
+  background-color: transparent;
+  display: flex;
+
+  > svg {
+    fill: ${darkerGray};
+  }
+
+  &:hover {
+    border-radius: 5px;
+    cursor: pointer;
+    > svg {
+      fill: ${superWhite};
+    }
+  }
+`
 
 export const DeleteButton = styled.button`
   border: 0;
@@ -120,7 +137,7 @@ export const DeleteButton = styled.button`
     border-radius: 5px;
     cursor: pointer;
     > svg {
-      fill: red;
+      fill: ${red};
     }
   }
 `

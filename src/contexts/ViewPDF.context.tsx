@@ -12,6 +12,7 @@ import {
 import useGet from "../hooks/useGet"
 import useDelete from "../hooks/useDelete"
 import { Veiculo } from "../models/PDF"
+import useExport from "../hooks/useExport"
 
 interface IViewPDFContext {
   result: any[]
@@ -25,6 +26,11 @@ interface IViewPDFContext {
   setSelectedPdf: Dispatch<SetStateAction<string>>
   onPDFclick: (fileName: string) => void
   onDeletePDF: (fileName: string, event: MouseEvent<HTMLButtonElement>) => void
+  onExportPDF: (
+    fileName: string,
+    event: MouseEvent<HTMLButtonElement>,
+    type: "json" | "csv"
+  ) => void
 }
 
 export const ViewPDFContext = createContext<IViewPDFContext>(
@@ -32,6 +38,7 @@ export const ViewPDFContext = createContext<IViewPDFContext>(
 )
 
 export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
+  const { exportPdf } = useExport()
   const { result, loading, setResult } = useGet()
   const { deletePdf, pdfName } = useDelete()
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
@@ -45,6 +52,33 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
       setVeiculos(file.veiculos || [])
     },
     [result, setSelectedPdf, setVeiculos]
+  )
+
+  const onExportPDF = useCallback(
+    async (
+      fileName: string,
+      event: React.MouseEvent<HTMLButtonElement>,
+      type: "json" | "csv"
+    ) => {
+      event.stopPropagation()
+      exportPdf(fileName, type)
+        .then((res) => {
+          const [name] = fileName.split(".")
+          const blob = new Blob([res], { type: `text/${type}` })
+          const url = window.URL.createObjectURL(blob)
+          const link = document.createElement("a")
+          link.href = url
+          link.setAttribute("download", `${name}.${type}`)
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-alert
+          alert(err)
+        })
+    },
+    [exportPdf]
   )
 
   const onDeletePDF = useCallback(
@@ -77,6 +111,7 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
       setSelectedPdf,
       onPDFclick,
       onDeletePDF,
+      onExportPDF,
     }),
     [
       result,
@@ -90,6 +125,7 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
       setSelectedPdf,
       onPDFclick,
       onDeletePDF,
+      onExportPDF,
     ]
   )
 

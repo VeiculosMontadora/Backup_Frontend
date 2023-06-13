@@ -57,7 +57,9 @@ const Home = () => {
         <HomeButton to="/view" data-testid="home-button">
           <img src={HomeIcon} alt="Ir para a página principal" />
         </HomeButton>
-        <HeaderTitle variant="h6">{t("fileUpload.title")}</HeaderTitle>
+        <HeaderTitle variant="h6" data-testid="home-title">
+          {t("fileUpload.title")}
+        </HeaderTitle>
         <Upload
           size={uploadedFiles.length > 0}
           uploadedFiles={uploadedFiles}
