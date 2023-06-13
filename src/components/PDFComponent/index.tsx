@@ -1,8 +1,8 @@
-import { useContext, useMemo } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import WarningIcon from "@mui/icons-material/Warning"
 import InfoIcon from "@mui/icons-material/Info"
-import FileDownloadIcon from "@mui/icons-material/FileDownload"
+import FileExportIcon from "@mui/icons-material/FileUpload"
 import DeleteIcon from "@mui/icons-material/Delete"
 import { PDFComponentProps } from "./types"
 import {
@@ -13,8 +13,10 @@ import {
   NotOpenComponentWrapper,
   ExportFileWrapper,
   DeleteButton,
+  ExportButton,
 } from "./styles"
 import { ViewPDFContext } from "../../contexts/ViewPDF.context"
+import ExportModal from "../ExportModal"
 
 const PDFComponent = ({
   fileName,
@@ -23,6 +25,19 @@ const PDFComponent = ({
   isSelected,
 }: PDFComponentProps) => {
   const { onPDFclick, onDeletePDF } = useContext(ViewPDFContext)
+
+  const [isHidden, setIsHidden] = useState(true)
+
+  useEffect(() => {
+    document.addEventListener("click", () => {
+      setIsHidden(true)
+    })
+    return () => {
+      document.removeEventListener("click", () => {
+        setIsHidden(true)
+      })
+    }
+  }, [])
 
   const icon = useMemo(() => {
     switch (status) {
@@ -67,11 +82,23 @@ const PDFComponent = ({
       {icon}
       <Title variant="h2">{fileName}</Title>
       <ExportFileWrapper>
-        <FileDownloadIcon />
+        <ExportButton
+          onClick={(event) => {
+            setIsHidden(false)
+            event.stopPropagation()
+          }}
+        >
+          <FileExportIcon />
+        </ExportButton>
         <DeleteButton onClick={(event) => onDeletePDF(fileName, event)}>
           <DeleteIcon />
         </DeleteButton>
       </ExportFileWrapper>
+      <ExportModal
+        pdfName={fileName}
+        isHidden={isHidden}
+        setIsHidden={setIsHidden}
+      />
     </Wrapper>
   )
 }

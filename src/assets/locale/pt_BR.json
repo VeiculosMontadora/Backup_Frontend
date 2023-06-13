@@ -43,6 +43,10 @@
       "completeFiles": "Arquivos completos",
       "noFiles": "Nenhum arquivo encontrado"
     },
+    "exportPDF": {
+      "JSON": "JSON",
+      "CSV": "CSV"
+    },
     "tab": {
       "noSelectedVehicle": "Nenhum veículo selecionado"
     },
