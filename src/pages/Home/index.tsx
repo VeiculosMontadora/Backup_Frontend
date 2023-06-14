@@ -71,7 +71,7 @@ const Home = () => {
             <FilesWrapper>
               {uploadedFiles.map((file, index) => {
                 return (
-                  <FilesRow key={file.pdf.name + file.pdf.size + file.pdf.type}>
+                  <FilesRow key={file.pdf.name + file.pdf.size}>
                     <FileLoading
                       fileName={file.pdf.name}
                       status="downloaded"

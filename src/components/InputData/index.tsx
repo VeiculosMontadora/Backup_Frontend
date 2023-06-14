@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { InputAdornment } from "@mui/material"
+import { useTranslation } from "react-i18next"
 import CopyInput from "../../assets/images/CopyInput.png"
 import { InputProps } from "./types"
 import { background, lightGray } from "../../styles/colors"
@@ -8,10 +9,12 @@ import { Label, StyledInput } from "./styles"
 const InputComponent = ({ label, data, small = false }: InputProps) => {
   const [value, setValue] = useState(data || "")
   const [clicked, setClicked] = useState(false)
-  const cursor = data ? "pointer" : "auto"
-  const nonClickable = !data
+  const cursor = useMemo(() => (data ? "pointer" : "auto"), [data])
+  const nonClickable = useMemo(() => !data, [data])
 
-  const backgroundColor = () => {
+  const { t } = useTranslation()
+
+  const backgroundColor = useCallback(() => {
     switch (true) {
       case clicked:
         return background
@@ -22,9 +25,9 @@ const InputComponent = ({ label, data, small = false }: InputProps) => {
       default:
         return lightGray
     }
-  }
+  }, [clicked, data])
 
-  const handleCopyClick = async () => {
+  const handleCopyClick = useCallback(async () => {
     try {
       if (!data) return
 
@@ -33,20 +36,15 @@ const InputComponent = ({ label, data, small = false }: InputProps) => {
         name: "clipboard-write" as PermissionName,
       })
 
-      if (!validStates.includes(state))
-        throw new Error("Permission not granted to copy text.")
+      if (!validStates.includes(state)) return
 
       await navigator.clipboard.writeText(value)
       setClicked(true)
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error("Failed to copy text: ", error)
+      console.error("Erro ao copiar: ", error)
     }
-  }
-
-  const handleInputFocus = () => {
-    setClicked(false)
-  }
+  }, [data, value])
 
   return (
     <div style={{ position: "relative" }}>
@@ -67,12 +65,12 @@ const InputComponent = ({ label, data, small = false }: InputProps) => {
             pointerEvents: nonClickable ? "none" : "auto",
           },
           readOnly: true,
-          onFocus: handleInputFocus,
+          onFocus: () => setClicked(false),
           endAdornment: (
             <InputAdornment position="end">
               <img
                 src={CopyInput}
-                alt="Copiar"
+                alt={t("viewPDF.input.copy") || ""}
                 style={{
                   cursor,
                   marginLeft: "8px",

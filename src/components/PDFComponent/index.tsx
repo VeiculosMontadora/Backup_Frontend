@@ -5,6 +5,8 @@ import InfoIcon from "@mui/icons-material/Info"
 import FileExportIcon from "@mui/icons-material/FileUpload"
 import DeleteIcon from "@mui/icons-material/Delete"
 import { PDFComponentProps } from "./types"
+import { ViewPDFContext } from "../../contexts/ViewPDF.context"
+import ExportModal from "../ExportModal"
 import {
   Wrapper,
   Title,
@@ -15,8 +17,6 @@ import {
   DeleteButton,
   ExportButton,
 } from "./styles"
-import { ViewPDFContext } from "../../contexts/ViewPDF.context"
-import ExportModal from "../ExportModal"
 
 const PDFComponent = ({
   fileName,
@@ -25,7 +25,6 @@ const PDFComponent = ({
   isSelected,
 }: PDFComponentProps) => {
   const { onPDFclick, onDeletePDF } = useContext(ViewPDFContext)
-
   const [isHidden, setIsHidden] = useState(true)
 
   useEffect(() => {
@@ -65,7 +64,6 @@ const PDFComponent = ({
   }, [status])
 
   const handleDateUpdated = () => {
-    // TODO: add font to lastEditedAt
     if (lastEditedAt) {
       return `Última edição em: ${lastEditedAt}`
     }

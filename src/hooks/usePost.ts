@@ -1,11 +1,9 @@
 import { useCallback } from "react"
 import { Request } from "../pages/Home/types"
+import endpoint from "../config"
 
 const usePost = () => {
-  const dev = import.meta.env.DEV
-  const staticURL = dev
-    ? `${import.meta.env.VITE_LOCAL}/pdfs/upload/`
-    : `${import.meta.env.VITE_PROD}/pdfs/upload/`
+  const staticURL = `${endpoint}/pdfs/upload`
 
   const post = useCallback(
     (file: Request, setFiles: any) => {

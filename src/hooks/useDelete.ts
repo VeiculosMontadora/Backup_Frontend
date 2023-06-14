@@ -1,11 +1,10 @@
 import { useCallback, useState } from "react"
+import endpoint from "../config"
 
 const useDelete = () => {
   const [pdfName, setPdfName] = useState<string>("")
-  const dev = import.meta.env.DEV
-  const staticURL = dev
-    ? `${import.meta.env.VITE_LOCAL}/pdfs/`
-    : `${import.meta.env.VITE_PROD}/pdfs/`
+
+  const staticURL = `${endpoint}/pdfs/`
 
   const deletePdf = useCallback(
     async (fileName: string) => {

@@ -1,17 +1,13 @@
 import { useContext } from "react"
 import { useTranslation } from "react-i18next"
-import { ButtonArea, Wrapper } from "./styles"
 import { ViewPDFContext } from "../../contexts/ViewPDF.context"
-
-interface ExportModalProps {
-  isHidden: boolean
-  setIsHidden: React.Dispatch<React.SetStateAction<boolean>>
-  pdfName: string
-}
+import ExportModalProps from "./types"
+import { ButtonArea, Wrapper } from "./styles"
 
 const ExportModal = ({ pdfName, isHidden, setIsHidden }: ExportModalProps) => {
   const { t } = useTranslation()
   const { onExportPDF } = useContext(ViewPDFContext)
+
   const onExport = (
     type: "json" | "csv",
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>

@@ -22,24 +22,22 @@ const Process = () => {
 
   const [files, setFiles] = useState<Request[]>(location?.state?.requests)
 
+  const error = useMemo(() => files?.find((file) => file.error), [files])
+  const loading = useMemo(() => files?.find((file) => file.loading), [files])
+
   const progressIcon = useMemo(() => {
-    if (files?.find((file) => file.loading))
-      return <ProgressIcon progress="extracting" />
+    if (loading) return <ProgressIcon progress="extracting" />
 
     if (files?.every((file) => file.error))
       return <ProgressIcon progress="fail" />
 
-    if (files?.find((file) => file.error))
-      return <ProgressIcon progress="partialFail" />
+    if (error) return <ProgressIcon progress="partialFail" />
 
     return <ProgressIcon progress="success" />
-  }, [files])
+  }, [error, files, loading])
 
   const button = useMemo(() => {
-    if (
-      files?.find((file) => file.error === false) &&
-      files?.find((file) => file.loading === false)
-    ) {
+    if (!error && !loading) {
       return (
         <Button
           text={t("fileUpload.buttons.view")}
@@ -56,7 +54,7 @@ const Process = () => {
         onClick={() => navigate("/")}
       />
     )
-  }, [files, navigate, t])
+  }, [error, loading, navigate, t])
 
   const checkStatus = (file: Request) => {
     if (file.error) {

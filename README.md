@@ -38,7 +38,7 @@ Depois, acesse o endereço `http://localhost:3000` no seu navegador.
 
 5. Para mais comandos, veja o arquivo `package.json` em 'scripts'.
 
-6. Não esqueça de criar um arquivo `.env` na raiz do projeto com as variáveis de ambiente necessárias para o projeto. Para mais informações, veja o arquivo `.env.example`.
+6. As configurações de endpoint da API se encontram no arquivo config.ts. Ao rodar localmente o projeto apontará para o backend local, em produção apontará para o backend em produção.
 
 ### Testes
 

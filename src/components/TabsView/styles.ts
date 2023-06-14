@@ -1,14 +1,7 @@
 import styled from "styled-components"
 import AppBar from "@mui/material/AppBar"
-import Tab from "@mui/material/Tab"
+import { Button } from "@mui/material"
 import { mediumGray, superWhite } from "../../styles/colors"
-
-export const TabSelected = styled(Tab)`
-  && {
-    background: ${superWhite};
-    color: black;
-  }
-`
 
 export const TabsWrapper = styled(AppBar)`
   && {
@@ -19,11 +12,20 @@ export const TabsWrapper = styled(AppBar)`
 export const PanelWrapper = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: 6rem 2rem 3rem 2rem;
-
+  overflow-x: hidden;
+  padding: 4rem 2rem 3rem 2rem;
   gap: 2rem;
   display: flex;
   flex-direction: column;
+`
+
+export const SaveButton = styled(Button)`
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  }
 `
 
 const ItemRow = styled.div`
