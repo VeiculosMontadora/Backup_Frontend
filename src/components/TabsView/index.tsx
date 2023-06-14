@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
@@ -35,6 +35,230 @@ const TabsView = () => {
     setValue(newValue)
     setCurrentVehicle(veiculos[newValue])
   }
+
+  const Grid = useCallback(() => {
+    return (
+      <>
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.model")}
+            data=""
+            copied={false}
+          />
+          <InputComponent
+            label={t("viewPDF.input.descRenavan")}
+            data={currentVehicle?.desc_renavam?.valor}
+            copied={currentVehicle?.desc_renavam?.copiado}
+          />
+        </TwoItemsRows>
+
+        <InputComponent
+          label={t("viewPDF.input.descCat")}
+          data={currentVehicle?.desc_cat?.valor}
+          copied={currentVehicle?.desc_cat?.copiado}
+        />
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.acronym")}
+            data={currentVehicle?.sigla?.valor}
+            copied={currentVehicle?.sigla?.copiado}
+          />
+          <InputComponent
+            label={t("viewPDF.input.descModelo")}
+            data={currentVehicle?.pacote_def_modelo?.valor}
+            copied={currentVehicle?.pacote_def_modelo?.copiado}
+          />
+        </TwoItemsRows>
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.versao")}
+            data={currentVehicle?.versao?.valor}
+            copied={currentVehicle?.versao?.copiado}
+          />
+          <InputComponent label="" data="" copied={false} />
+        </TwoItemsRows>
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.ano")}
+            data={currentVehicle?.ano?.valor}
+            copied={currentVehicle?.ano?.copiado}
+          />
+          <InputComponent label="" data="" copied={false} />
+        </TwoItemsRows>
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.marca")}
+            data={currentVehicle?.marca?.valor}
+            copied={currentVehicle?.marca?.copiado}
+          />
+          <InputComponent label="" data="" copied={false} />
+        </TwoItemsRows>
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.linha")}
+            data={currentVehicle?.linha?.valor}
+            copied={currentVehicle?.linha?.copiado}
+          />
+          <InputComponent label="" data="" copied={false} />
+        </TwoItemsRows>
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.carrocaria")}
+            data=""
+            copied={false}
+          />
+          <InputComponent label="" data="" copied={false} />
+        </TwoItemsRows>
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.segmento")}
+            data=""
+            copied={false}
+          />
+          <InputComponent label="" data="" copied={false} />
+        </TwoItemsRows>
+
+        <FiveItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.motor")}
+            data={currentVehicle?.motor?.modelo?.valor}
+            copied={currentVehicle?.motor?.modelo.copiado}
+          />
+          <InputComponent
+            label={t("viewPDF.input.cilindradas")}
+            data={currentVehicle?.motor?.cilindradas?.valor}
+            copied={currentVehicle?.motor?.cilindradas.copiado}
+          />
+          <InputComponent
+            label={t("viewPDF.input.nroCilindros")}
+            data={currentVehicle?.motor?.nro_cilindradas?.valor}
+            copied={currentVehicle?.motor?.nro_cilindradas.copiado}
+            small
+          />
+          <InputComponent
+            label={t("viewPDF.input.potencia")}
+            data={
+              currentVehicle?.motor?.combustiveis?.[0] === undefined
+                ? ""
+                : currentVehicle?.motor?.combustiveis?.[0].potencia?.valor
+            }
+            copied={
+              currentVehicle?.motor?.combustiveis?.[0] === undefined
+                ? false
+                : currentVehicle?.motor?.combustiveis?.[0].potencia?.copiado
+            }
+          />
+          <InputComponent
+            label={t("viewPDF.input.tipoCombustivel")}
+            data={
+              currentVehicle?.motor?.combustiveis?.[0] === undefined
+                ? ""
+                : currentVehicle?.motor?.combustiveis?.[0].tipo_combustivel
+                    ?.valor
+            }
+            copied={
+              currentVehicle?.motor?.combustiveis?.[0] === undefined
+                ? false
+                : currentVehicle?.motor?.combustiveis?.[0].tipo_combustivel
+                    ?.copiado
+            }
+            small
+          />
+        </FiveItemsRows>
+
+        <FiveItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.freteEspecfico")}
+            data=""
+            copied={false}
+          />
+          <InputComponent label="" data="" copied={false} />
+          <InputComponent
+            label={t("viewPDF.input.valor")}
+            data=""
+            copied={false}
+          />
+          <InputComponent
+            label={t("viewPDF.input.potencia1")}
+            data=""
+            copied={false}
+          />
+          <InputComponent label="" data="" copied={false} />
+        </FiveItemsRows>
+
+        <ThreeItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.carga")}
+            data={currentVehicle?.carga?.valor}
+            copied={currentVehicle?.carga?.copiado}
+          />
+          <InputComponent
+            label={t("viewPDF.input.numPassag")}
+            data={currentVehicle?.num_passag?.valor}
+            copied={currentVehicle?.num_passag?.copiado}
+          />
+          <InputComponent
+            label={t("viewPDF.input.numPortas")}
+            data={currentVehicle?.num_portas?.valor}
+            copied={currentVehicle?.num_portas?.copiado}
+          />
+        </ThreeItemsRows>
+
+        <TwoItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.numRenavam")}
+            data={currentVehicle?.num_renavam?.valor}
+            copied={currentVehicle?.num_renavam?.copiado}
+            small
+          />
+          <InputComponent
+            label={t("viewPDF.input.especie")}
+            data=""
+            copied={false}
+          />
+        </TwoItemsRows>
+
+        <ThreeItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.linhaServico")}
+            data=""
+            copied={false}
+          />
+          <InputComponent label="" data="" copied={false} />
+          <InputComponent
+            label={t("viewPDF.input.codFIPE")}
+            data=""
+            copied={false}
+          />
+        </ThreeItemsRows>
+
+        <ThreeItemsRows>
+          <InputComponent
+            label={t("viewPDF.input.aliqIPI")}
+            data=""
+            copied={false}
+          />
+          <InputComponent
+            label={t("viewPDF.input.prazoGarantia")}
+            data=""
+            copied={false}
+          />
+          <InputComponent
+            label={t("viewPDF.input.kmGarantia")}
+            data=""
+            copied={false}
+          />
+        </ThreeItemsRows>
+      </>
+    )
+  }, [t, currentVehicle])
 
   return (
     <Box
@@ -99,151 +323,7 @@ const TabsView = () => {
         </Tabs>
       </TabsWrapper>
       <PanelWrapper>
-        <>
-          <TwoItemsRows>
-            <InputComponent label={t("viewPDF.input.model")} data="" />
-            <InputComponent
-              label={t("viewPDF.input.descRenavan")}
-              data={currentVehicle?.desc_renavam?.valor}
-            />
-          </TwoItemsRows>
-
-          <InputComponent
-            label={t("viewPDF.input.descCat")}
-            data={currentVehicle?.desc_cat?.valor}
-          />
-
-          <TwoItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.acronym")}
-              data={currentVehicle?.sigla?.valor}
-            />
-            <InputComponent
-              label={t("viewPDF.input.descModelo")}
-              data={currentVehicle?.pacote_def_modelo?.valor}
-            />
-          </TwoItemsRows>
-
-          <TwoItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.versao")}
-              data={currentVehicle?.versao?.valor}
-            />
-            <InputComponent label="" data="" />
-          </TwoItemsRows>
-
-          <TwoItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.ano")}
-              data={currentVehicle?.ano?.valor}
-            />
-            <InputComponent label="" data="" />
-          </TwoItemsRows>
-
-          <TwoItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.marca")}
-              data={currentVehicle?.marca?.valor}
-            />
-            <InputComponent label="" data="" />
-          </TwoItemsRows>
-
-          <TwoItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.linha")}
-              data={currentVehicle?.linha?.valor}
-            />
-            <InputComponent label="" data="" />
-          </TwoItemsRows>
-
-          <TwoItemsRows>
-            <InputComponent label={t("viewPDF.input.carrocaria")} data="" />
-            <InputComponent label="" data="" />
-          </TwoItemsRows>
-
-          <TwoItemsRows>
-            <InputComponent label={t("viewPDF.input.segmento")} data="" />
-            <InputComponent label="" data="" />
-          </TwoItemsRows>
-
-          <FiveItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.motor")}
-              data={currentVehicle?.motor?.modelo?.valor}
-            />
-            <InputComponent
-              label={t("viewPDF.input.cilindradas")}
-              data={currentVehicle?.motor?.cilindradas?.valor}
-            />
-            <InputComponent
-              label={t("viewPDF.input.nroCilindros")}
-              data={currentVehicle?.motor?.nro_cilindradas?.valor}
-              small
-            />
-            <InputComponent
-              label={t("viewPDF.input.potencia")}
-              data={
-                currentVehicle?.motor?.combustiveis?.[0] === undefined
-                  ? ""
-                  : currentVehicle?.motor?.combustiveis?.[0].potencia?.valor
-              }
-            />
-            <InputComponent
-              label={t("viewPDF.input.tipoCombustivel")}
-              data={
-                currentVehicle?.motor?.combustiveis?.[0] === undefined
-                  ? ""
-                  : currentVehicle?.motor?.combustiveis?.[0].tipo_combustivel
-                      ?.valor
-              }
-              small
-            />
-          </FiveItemsRows>
-
-          <FiveItemsRows>
-            <InputComponent label={t("viewPDF.input.freteEspecfico")} data="" />
-            <InputComponent label="" data="" />
-            <InputComponent label={t("viewPDF.input.valor")} data="" />
-            <InputComponent label={t("viewPDF.input.potencia1")} data="" />
-            <InputComponent label="" data="" />
-          </FiveItemsRows>
-
-          <ThreeItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.carga")}
-              data={currentVehicle?.carga?.valor}
-            />
-            <InputComponent
-              label={t("viewPDF.input.numPassag")}
-              data={currentVehicle?.num_passag?.valor}
-            />
-            <InputComponent
-              label={t("viewPDF.input.numPortas")}
-              data={currentVehicle?.num_portas?.valor}
-            />
-          </ThreeItemsRows>
-
-          <TwoItemsRows>
-            <InputComponent
-              label={t("viewPDF.input.numRenavam")}
-              data={currentVehicle?.num_renavam?.valor}
-              small
-            />
-            <InputComponent label={t("viewPDF.input.especie")} data="" />
-          </TwoItemsRows>
-
-          <ThreeItemsRows>
-            <InputComponent label={t("viewPDF.input.linhaServico")} data="" />
-            <InputComponent label="" data="" />
-            <InputComponent label={t("viewPDF.input.codFIPE")} data="" />
-          </ThreeItemsRows>
-
-          <ThreeItemsRows>
-            <InputComponent label={t("viewPDF.input.aliqIPI")} data="" />
-            <InputComponent label={t("viewPDF.input.prazoGarantia")} data="" />
-            <InputComponent label={t("viewPDF.input.kmGarantia")} data="" />
-          </ThreeItemsRows>
-        </>
+        <Grid />
       </PanelWrapper>
       <SaveButton variant="contained" color="primary">
         {t("view.saveButton")}

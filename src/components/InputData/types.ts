@@ -1,5 +1,6 @@
 export type InputProps = {
   label: string
-  data?: string
+  data: string
+  copied: boolean
   small?: boolean
 }
