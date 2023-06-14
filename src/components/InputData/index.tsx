@@ -6,9 +6,9 @@ import { InputProps } from "./types"
 import { background, lightGray } from "../../styles/colors"
 import { Label, StyledInput } from "./styles"
 
-const InputComponent = ({ label, data, small = false }: InputProps) => {
-  const [value, setValue] = useState(data || "")
-  const [clicked, setClicked] = useState(false)
+const InputComponent = ({ label, data, copied, small = false }: InputProps) => {
+  const [value, setValue] = useState(data)
+  const [clicked, setClicked] = useState(copied)
   const cursor = useMemo(() => (data ? "pointer" : "auto"), [data])
   const nonClickable = useMemo(() => !data, [data])
 
@@ -40,6 +40,10 @@ const InputComponent = ({ label, data, small = false }: InputProps) => {
 
       await navigator.clipboard.writeText(value)
       setClicked(true)
+      // Obs: log necessário para copiar (?)
+      // TODO: Verificar
+      // eslint-disable-next-line no-console
+      console.log()
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error("Erro ao copiar: ", error)
