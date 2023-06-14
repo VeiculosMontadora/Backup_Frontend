@@ -1,10 +1,8 @@
 import { useCallback } from "react"
+import endpoint from "../config"
 
 const useUpdateStatus = () => {
-  const dev = import.meta.env.DEV
-  const staticURL = dev
-    ? `${import.meta.env.VITE_LOCAL}/pdfs/`
-    : `${import.meta.env.VITE_PROD}/pdfs/`
+  const staticURL = `${endpoint}/pdfs/`
 
   const updateStatusPdf = useCallback(
     async (fileName: string, status: string) => {
