@@ -1,9 +1,10 @@
 import { useContext, useEffect, useMemo, useState } from "react"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
-import WarningIcon from "@mui/icons-material/Warning"
-import InfoIcon from "@mui/icons-material/Info"
+import ImportContactsIcon from "@mui/icons-material/ImportContacts"
 import FileExportIcon from "@mui/icons-material/FileUpload"
 import DeleteIcon from "@mui/icons-material/Delete"
+import CheckIcon from "@mui/icons-material/Check"
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { PDFComponentProps } from "./types"
 import { ViewPDFContext } from "../../contexts/ViewPDF.context"
 import ExportModal from "../ExportModal"
@@ -15,6 +16,7 @@ import {
   NotOpenComponentWrapper,
   ExportFileWrapper,
   DeleteButton,
+  FinishButton,
   ExportButton,
 } from "./styles"
 
@@ -24,7 +26,8 @@ const PDFComponent = ({
   lastEditedAt,
   isSelected,
 }: PDFComponentProps) => {
-  const { onPDFclick, onDeletePDF } = useContext(ViewPDFContext)
+  const { onPDFclick, onDeletePDF, onUpdatePDF, selectedPdf } =
+    useContext(ViewPDFContext)
   const [isHidden, setIsHidden] = useState(true)
 
   useEffect(() => {
@@ -49,13 +52,13 @@ const PDFComponent = ({
       case "pendente":
         return (
           <UnfinishedComponentWrapper>
-            <WarningIcon />
+            <ImportContactsIcon />
           </UnfinishedComponentWrapper>
         )
       case "nao aberto":
         return (
           <NotOpenComponentWrapper>
-            <InfoIcon />
+            <VisibilityOffIcon />
           </NotOpenComponentWrapper>
         )
       default:
@@ -91,6 +94,9 @@ const PDFComponent = ({
         <DeleteButton onClick={(event) => onDeletePDF(fileName, event)}>
           <DeleteIcon />
         </DeleteButton>
+        <FinishButton onClick={() => onUpdatePDF(selectedPdf)}>
+          <CheckIcon />
+        </FinishButton>
       </ExportFileWrapper>
       <ExportModal
         pdfName={fileName}

@@ -73,7 +73,7 @@ const PDFGroup = ({ title, PDFs, defaultExpanded }: PDFGroupProps) => {
         fileName={file.nome}
         status={file.status}
         lastEditedAt={file.ultimo_visto.toString()}
-        isSelected={selectedPdf === file.nome + file.ultimo_visto}
+        isSelected={selectedPdf === file}
       />
     ))
   }, [t, loading, selectedPdf, PDFs])
@@ -90,7 +90,7 @@ const PDFGroup = ({ title, PDFs, defaultExpanded }: PDFGroupProps) => {
         data-testid="pdf-group-header"
       >
         <Title variant="h2" data-testid="pdf-group-header-title">
-          {title}
+          {title} ({PDFs.length})
         </Title>
       </AccordionSummary>
       <AccordionDetails data-testid="pdf-group-body">{pdfs}</AccordionDetails>

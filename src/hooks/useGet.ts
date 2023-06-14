@@ -1,12 +1,11 @@
-import { useCallback, useEffect, useState } from "react"
+import { useContext, useState } from "react"
+import { ViewPDFContext } from "../contexts/ViewPDF.context"
 import endpoint from "../config"
 
 const useGet = () => {
-  const [result, setResult] = useState<any[]>([])
-  const [error, setError] = useState<boolean>(false)
+  const { setResult } = useContext(ViewPDFContext)
   const [loading, setLoading] = useState<boolean>(false)
-
-  const get = useCallback(async () => {
+  const get = async () => {
     if (loading) {
       return
     }
@@ -24,16 +23,12 @@ const useGet = () => {
           localStorage.setItem("pdfs", JSON.stringify(await res.json()))
         }
       })
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false))
-  }, [loading])
-
-  useEffect(() => {
-    get()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return { get, result, loading, error, setResult }
+      .catch(() => {})
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+  return { get }
 }
 
 export default useGet

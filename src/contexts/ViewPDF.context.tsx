@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   createContext,
   Dispatch,
@@ -9,23 +10,25 @@ import {
   useMemo,
   useState,
 } from "react"
-import useGet from "../hooks/useGet"
 import useDelete from "../hooks/useDelete"
-import { Veiculo } from "../models/PDF"
+import { PDF, Veiculo } from "../models/PDF"
+import useUpdateStatus from "../hooks/useUpdate"
 import useExport from "../hooks/useExport"
 
 interface IViewPDFContext {
   result: any[]
-  loading: boolean
   setResult: Dispatch<SetStateAction<any[]>>
   deletePdf: (fileName: string) => Promise<void>
   pdfName: string
   veiculos: Veiculo[]
   setVeiculos: Dispatch<SetStateAction<Veiculo[]>>
-  selectedPdf: string
-  setSelectedPdf: Dispatch<SetStateAction<string>>
+  selectedPdf: PDF
+  setSelectedPdf: Dispatch<SetStateAction<PDF>>
   onPDFclick: (fileName: string) => void
   onDeletePDF: (fileName: string, event: MouseEvent<HTMLButtonElement>) => void
+  loading: boolean
+  setLoading: Dispatch<SetStateAction<boolean>>
+  onUpdatePDF: (file: PDF) => void
   onExportPDF: (
     fileName: string,
     event: MouseEvent<HTMLButtonElement>,
@@ -39,19 +42,25 @@ export const ViewPDFContext = createContext<IViewPDFContext>(
 
 export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
   const { exportPdf } = useExport()
-  const { result, loading, setResult } = useGet()
   const { deletePdf, pdfName } = useDelete()
+  const { updateStatusPdf } = useUpdateStatus()
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
-  const [selectedPdf, setSelectedPdf] = useState<string>("")
+  const [selectedPdf, setSelectedPdf] = useState<PDF>({} as PDF)
+  const [result, setResult] = useState<any[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   const onPDFclick = useCallback(
     (fileName: string) => {
       const file = result.find((arquivo) => arquivo.nome === fileName)
       if (!file) return
-      setSelectedPdf(fileName + file.ultimo_visto)
+      if (file.status === "nao aberto") {
+        file.status = "pendente"
+        updateStatusPdf(file.nome, "pendente")
+      }
+      setSelectedPdf(file)
       setVeiculos(file.veiculos || [])
     },
-    [result, setSelectedPdf, setVeiculos]
+    [result, updateStatusPdf]
   )
 
   const onExportPDF = useCallback(
@@ -91,9 +100,24 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
     [deletePdf]
   )
 
+  const onUpdatePDF = useCallback(
+    async (file: PDF) => {
+      await updateStatusPdf(file.nome, "concluido")
+      setSelectedPdf({ ...file, status: "concluido" })
+      window.location.reload()
+    },
+    [updateStatusPdf]
+  )
+
   useEffect(() => {
-    if (result.find((arq) => arq.nome === pdfName)) {
-      const newResult = result.filter(({ nome }) => nome !== pdfName)
+    if (
+      result?.find(
+        (arq) => arq.nome === (Array.isArray(pdfName) ? pdfName[0] : pdfName)
+      )
+    ) {
+      const newResult = result.filter(
+        ({ nome }) => nome !== (Array.isArray(pdfName) ? pdfName[0] : pdfName)
+      )
       setResult(newResult)
     }
   }, [pdfName, result, setResult])
@@ -101,7 +125,6 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
   const viewPDFItems = useMemo(
     () => ({
       result,
-      loading,
       setResult,
       deletePdf,
       pdfName,
@@ -111,11 +134,13 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
       setSelectedPdf,
       onPDFclick,
       onDeletePDF,
+      loading,
+      setLoading,
+      onUpdatePDF,
       onExportPDF,
     }),
     [
       result,
-      loading,
       setResult,
       deletePdf,
       pdfName,
@@ -125,6 +150,9 @@ export const ViewPDFProvider = ({ children }: { children: ReactNode }) => {
       setSelectedPdf,
       onPDFclick,
       onDeletePDF,
+      loading,
+      setLoading,
+      onUpdatePDF,
       onExportPDF,
     ]
   )

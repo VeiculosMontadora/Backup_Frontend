@@ -1,46 +1,49 @@
-import { useContext, useMemo } from "react"
+import { useContext, useEffect, useCallback } from "react"
 import { useTranslation } from "react-i18next"
 import PDFGroup from "../PDFGroup"
-import { PDF } from "../../models/PDF"
 import Wrapper from "./styles"
 import { ViewPDFContext } from "../../contexts/ViewPDF.context"
+import useGet from "../../hooks/useGet"
+import { PDF } from "../../models/PDF"
 
 const PDFList = () => {
   const { t } = useTranslation()
   const { result } = useContext(ViewPDFContext)
+  const { get } = useGet()
 
-  const filterPDFs = useMemo(() => {
-    if (!result?.forEach) return [[], [], []]
+  useEffect(() => {
+    get()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    const notOpened: PDF[] = []
-    const incompletePDFs: PDF[] = []
-    const completePDFs: PDF[] = []
+  const returnPDFs = useCallback(
+    (type: string) => {
+      if (type === "openEditors")
+        return (result || []).filter(
+          (file: PDF) => file.status === "nao aberto"
+        )
+      if (type === "incompleteFiles")
+        return (result || []).filter((file: PDF) => file.status === "pendente")
 
-    result?.forEach((file: any) => {
-      if (file.status === "nao aberto") notOpened.push(file)
-      if (file.status === "pendente") incompletePDFs.push(file)
-      if (file.status === "concluido") completePDFs.push(file)
-    })
-
-    return [notOpened, incompletePDFs, completePDFs]
-  }, [result])
-
-  const [notOpened, incompletePDFs, completePDFs] = filterPDFs
+      return (result || []).filter((file: PDF) => file.status === "concluido")
+    },
+    [result]
+  )
 
   return (
     <Wrapper>
       <PDFGroup
         title={t("viewPDF.pdfList.openEditors")}
-        PDFs={notOpened}
+        PDFs={returnPDFs("openEditors")}
         defaultExpanded
       />
       <PDFGroup
         title={t("viewPDF.pdfList.incompleteFiles")}
-        PDFs={incompletePDFs}
+        PDFs={returnPDFs("incompleteFiles")}
       />
       <PDFGroup
         title={t("viewPDF.pdfList.completeFiles")}
-        PDFs={completePDFs}
+        PDFs={returnPDFs("completeFiles")}
       />
     </Wrapper>
   )
