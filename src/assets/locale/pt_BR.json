@@ -44,6 +44,10 @@
       "noFiles": "Nenhum arquivo encontrado",
       "go": "Ir para a página de envio de pdf"
     },
+    "tab": {
+      "noSelectedVehicle": "Nenhum veículo selecionado",
+      "finishedButton": "Concluído"
+    },
     "exportPDF": {
       "JSON": "JSON",
       "CSV": "CSV"

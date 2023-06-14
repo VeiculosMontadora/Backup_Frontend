@@ -141,3 +141,21 @@ export const DeleteButton = styled.button`
     }
   }
 `
+
+export const FinishButton = styled.button`
+  border: 0;
+  background-color: transparent;
+  display: flex;
+
+  > svg {
+    fill: ${darkerGray};
+  }
+
+  &:hover {
+    border-radius: 5px;
+    cursor: pointer;
+    > svg {
+      fill: white;
+    }
+  }
+`

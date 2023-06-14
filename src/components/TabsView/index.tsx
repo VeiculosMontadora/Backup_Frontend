@@ -11,10 +11,10 @@ import {
   TwoItemsRows,
   TabsWrapper,
   PanelWrapper,
-  ArrowsBar,
   ArrowWrapper,
   ThreeItemsRows,
   FiveItemsRows,
+  Carinha,
   SaveButton,
 } from "./styles"
 
@@ -272,9 +272,9 @@ const TabsView = () => {
       }}
     >
       <TabsWrapper position="static">
-        <ArrowsBar>
-          {!!veiculos?.length && (
-            <ArrowsBar>
+        {!!veiculos?.length && (
+          <Carinha>
+            <div>
               <ArrowWrapper>
                 <Arrow
                   color="primary"
@@ -297,9 +297,9 @@ const TabsView = () => {
                   }}
                 />
               </ArrowWrapper>
-            </ArrowsBar>
-          )}
-        </ArrowsBar>
+            </div>
+          </Carinha>
+        )}
         <Tabs
           value={value}
           onChange={handleChange}

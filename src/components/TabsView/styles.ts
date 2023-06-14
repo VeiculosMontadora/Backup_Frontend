@@ -45,9 +45,11 @@ export const FiveItemsRows = styled(ItemRow)`
   grid-template-columns: 20% 15% 15% 15% 15%;
 `
 
-export const ArrowsBar = styled.div`
+export const Carinha = styled.div`
   display: flex;
-  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.25rem;
 `
 
 export const ArrowWrapper = styled.button`
@@ -60,4 +62,10 @@ export const ArrowWrapper = styled.button`
       fill: ${superWhite};
     }
   }
+`
+
+export const FinishButtonWrapper = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
 `
