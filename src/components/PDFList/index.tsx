@@ -1,15 +1,13 @@
-import { useContext, useEffect, useMemo } from "react"
+import { useContext, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import PDFGroup from "../PDFGroup"
 import { PDF } from "../../models/PDF"
 import Wrapper from "./styles"
 import { ViewPDFContext } from "../../contexts/ViewPDF.context"
-import useGet from "../../hooks/useGet"
 
 const PDFList = () => {
   const { t } = useTranslation()
   const { result } = useContext(ViewPDFContext)
-  const { get } = useGet()
 
   const filterPDFs = useMemo(() => {
     if (!result?.forEach) return [[], [], []]
@@ -28,11 +26,6 @@ const PDFList = () => {
   }, [result])
 
   const [notOpened, incompletePDFs, completePDFs] = filterPDFs
-
-  useEffect(() => {
-    get()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <Wrapper>

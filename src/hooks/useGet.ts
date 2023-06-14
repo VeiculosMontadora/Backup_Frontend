@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
+import endpoint from "../config"
 
 const useGet = () => {
   const [result, setResult] = useState<any[]>([])
@@ -12,10 +13,7 @@ const useGet = () => {
 
     setLoading(true)
 
-    const dev = import.meta.env.DEV
-    const staticURL = dev
-      ? `${import.meta.env.VITE_LOCAL}/pdfs/`
-      : `${import.meta.env.VITE_PROD}/pdfs/`
+    const staticURL = `${endpoint}/pdfs/`
 
     await fetch(staticURL, {
       method: "GET",

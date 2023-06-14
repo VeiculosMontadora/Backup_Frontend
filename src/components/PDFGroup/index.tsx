@@ -8,7 +8,7 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary"
 import { PDF } from "../../models/PDF"
-import { LoadingIconSpin } from "../FileLoading"
+import LoadingIconSpin from "../LoadingIconSpin"
 import PDFComponent from "../PDFComponent"
 import { Center, Title, AccordionDetails } from "./styles"
 import { ViewPDFContext } from "../../contexts/ViewPDF.context"

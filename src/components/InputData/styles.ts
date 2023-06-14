@@ -15,7 +15,7 @@ export const StyledInput = styled(TextField)`
 export const Label = styled(Typography)`
   && {
     font-size: ${(props: { small: boolean }) =>
-      props.small ? ".87rem" : "1rem"};
+      props.small ? ".85rem" : "1rem"};
   }
 
   position: absolute;

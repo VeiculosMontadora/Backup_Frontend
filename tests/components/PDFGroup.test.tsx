@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react"
 import PDFGroup from "../../src/components/PDFGroup"
 import { act } from "react-dom/test-utils"
 
-// TODO: Improve tests
 describe("PDFGroup component", () => {
   const title = "Editores Abertos"
   const PDFs: any = [

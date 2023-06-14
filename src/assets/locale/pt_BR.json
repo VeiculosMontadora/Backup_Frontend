@@ -41,16 +41,15 @@
       "openEditors": "Editores abertos",
       "incompleteFiles": "Arquivos incompletos",
       "completeFiles": "Arquivos completos",
-      "noFiles": "Nenhum arquivo encontrado"
+      "noFiles": "Nenhum arquivo encontrado",
+      "go": "Ir para a página de envio de pdf"
     },
     "exportPDF": {
       "JSON": "JSON",
       "CSV": "CSV"
     },
-    "tab": {
-      "noSelectedVehicle": "Nenhum veículo selecionado"
-    },
     "input": {
+      "copy": "Copiar",
       "model": "Modelo",
       "descRenavan": "Desc Renavan",
       "descCat": "Descrição",

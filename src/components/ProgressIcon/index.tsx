@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { LoadingIconSpin } from "../FileLoading"
+import LoadingIconSpin from "../LoadingIconSpin"
 import Success from "../../assets/Loaded"
 import Failed from "../../assets/Failed"
 import PartialFailed from "../../assets/PartialFailed"

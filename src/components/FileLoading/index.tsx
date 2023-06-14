@@ -1,34 +1,9 @@
 import { useMemo } from "react"
 import DeleteIcon from "@mui/icons-material/Delete"
-import CircularProgress, {
-  circularProgressClasses,
-} from "@mui/material/CircularProgress"
 import LinearProgress from "@mui/material/LinearProgress"
-import { FileLoadingProps, LoadingIconSpinProps } from "./types"
-import { blue } from "../../styles/colors"
+import { FileLoadingProps } from "./types"
+import LoadingIconSpin from "../LoadingIconSpin"
 import { Wrapper, Title, DeleteButton } from "./styles"
-
-// Infinitely spinning progress for file download
-export const LoadingIconSpin = ({
-  animationDuration = "1100ms",
-  size = 30,
-  thickness = 4,
-}: Partial<LoadingIconSpinProps>) => (
-  <CircularProgress
-    // indeterminate = scrolls indefinetly
-    variant="indeterminate"
-    sx={{
-      color: { blue },
-      animationDuration,
-      [`& .${circularProgressClasses.circle}`]: {
-        // Define if edges of the spinner are rounded or not
-        strokeLinecap: "round",
-      },
-    }}
-    size={size}
-    thickness={thickness}
-  />
-)
 
 const FileLoading = ({
   fileName,

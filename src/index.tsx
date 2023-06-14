@@ -1,16 +1,16 @@
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Process from "./pages/Process"
-import ViewPdf from "./pages/ViewPdf"
-import NotFound from "./pages/NotFound"
 import "@fontsource/roboto/300.css"
 import "@fontsource/roboto/400.css"
 import "@fontsource/roboto/500.css"
 import "@fontsource/roboto/700.css"
+import Home from "./pages/Home"
+import Process from "./pages/Process"
+import ViewPdf from "./pages/ViewPdf"
+import NotFound from "./pages/NotFound"
 import "./hooks/useI18n"
-import "./styles/styles"
 import { ViewPDFProvider } from "./contexts/ViewPDF.context"
+import "./styles/styles"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>

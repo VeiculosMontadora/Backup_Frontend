@@ -1,11 +1,5 @@
 import { Button as Btn } from "@mui/material"
-
-type ButtonProps = {
-  text: string
-  color: "blue" | "red"
-  onClick: () => void
-  disabled?: boolean
-}
+import ButtonProps from "./types"
 
 const Button = ({ text, color, onClick, disabled }: ButtonProps) => {
   const background = color === "blue" ? "primary" : "error"

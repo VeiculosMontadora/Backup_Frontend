@@ -21,14 +21,3 @@ export type FileLoadingProps = {
   /** for the "dowloaded" state */
   handleDeleteClick?: (index: number) => void
 }
-
-export type LoadingIconSpinProps = {
-  /** duration in ms (ex: 1100ms) */
-  animationDuration: string
-
-  /** size of the icon */
-  size: number
-
-  /** width of the icon */
-  thickness: number
-}
