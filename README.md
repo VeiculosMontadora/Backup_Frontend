@@ -1,5 +1,16 @@
 # Frontend
 
+![Static Badge](https://img.shields.io/badge/Linguagem%3A--gray)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?&logo=typescript&logoColor=blue&color=black)
+
+![Static Badge](https://img.shields.io/badge/Tecnologias%3A--gray)
+![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?&logo=html5&logoColor=orange&color=black)
+![HTML5](https://img.shields.io/badge/CSS3-%23E34F26.svg?&logo=css3&logoColor=lightblue&color=black)
+
+![Static Badge](https://img.shields.io/badge/Biblioteca_Javascript-React-blue)
+![Static Badge](https://img.shields.io/badge/Enviroment-Node.js-green)
+![Static Badge](https://img.shields.io/badge/Interface-MaterialUI-orange)
+
 Esse é o repositório do frontend do projeto Veículos Via Montadora. Ele é responsável por prover a interface de usuário do projeto.
 
 ## React.js
