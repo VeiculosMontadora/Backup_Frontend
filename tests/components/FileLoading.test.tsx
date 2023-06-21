@@ -6,28 +6,28 @@ describe("file loading component", () => {
   test("should render the component with downloading state", () => {
     render(<FileLoading fileName="Test" status="downloading" />)
 
-    const element = screen.getByTestId("downloading")
+    const element = screen.getByTestId("file-downloading-wrapper")
     expect(element).toBeInTheDocument()
   })
 
   test("should render the component with downloaded state", () => {
     render(<FileLoading fileName="Test" status="downloaded" />)
 
-    const element = screen.getByTestId("downloaded")
+    const element = screen.getByTestId("file-downloaded-wrapper")
     expect(element).toBeInTheDocument()
   })
 
   test("should render the component with uploading state", () => {
     render(<FileLoading fileName="Test" status="uploading" />)
 
-    const element = screen.getByTestId("uploading")
+    const element = screen.getByTestId("file-uploading-wrapper")
     expect(element).toBeInTheDocument()
   })
 
   test("should render the component with uploaded state", () => {
     render(<FileLoading fileName="Test" status="uploaded" />)
 
-    const element = screen.getByTestId("uploaded")
+    const element = screen.getByTestId("file-uploaded-wrapper")
     expect(element).toBeInTheDocument()
   })
 

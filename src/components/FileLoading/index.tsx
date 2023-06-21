@@ -38,7 +38,7 @@ const FileLoading = ({
   )
 
   return (
-    <Wrapper data-status={status} data-testid={status}>
+    <Wrapper data-status={status} data-testid={`file-${status}-wrapper`}>
       <Title variant="h2" data-testid="file-name">
         {fileName}
       </Title>

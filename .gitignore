@@ -29,3 +29,7 @@ dist-ssr
 
 # Ignored auto-generated npm lock file
 package-lock.json
+
+# Ignore cypress confidential files and others
+cypress/screenshots
+cypress/videos

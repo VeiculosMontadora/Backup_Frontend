@@ -76,14 +76,18 @@ const PDFComponent = ({
   return (
     <Wrapper
       data-status={status}
+      data-testid={`pdf-component-${fileName}-wrapper`}
       data-updated={handleDateUpdated()}
       data-selected={isSelected}
       onClick={() => onPDFclick(fileName)}
     >
       {icon}
-      <Title variant="h2">{fileName}</Title>
+      <Title variant="h2" data-testid={`pdf-component-${fileName}-title`}>
+        {fileName}
+      </Title>
       <ExportFileWrapper>
         <ExportButton
+          data-testid={`pdf-component-${fileName}-export-button`}
           onClick={(event) => {
             setIsHidden(false)
             event.stopPropagation()
@@ -91,7 +95,10 @@ const PDFComponent = ({
         >
           <FileExportIcon />
         </ExportButton>
-        <DeleteButton onClick={(event) => onDeletePDF(fileName, event)}>
+        <DeleteButton
+          data-testid={`pdf-component-${fileName}-delete-button`}
+          onClick={(event) => onDeletePDF(fileName, event)}
+        >
           <DeleteIcon />
         </DeleteButton>
         <FinishButton onClick={() => onUpdatePDF(selectedPdf)}>
