@@ -16,6 +16,12 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["vite.config.ts", ".eslintrc.cjs", "src"],
+  "include": [
+    "vite.config.ts",
+    ".eslintrc.cjs",
+    "src",
+    "cypress.config.ts",
+    "cypress/**/*.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -277,6 +277,7 @@ const TabsView = () => {
             <div>
               <ArrowWrapper>
                 <Arrow
+                  data-testid="tabs-view-back-arrow"
                   color="primary"
                   style={{ transform: "rotate(180deg)" }}
                   onClick={() => {
@@ -288,6 +289,7 @@ const TabsView = () => {
               </ArrowWrapper>
               <ArrowWrapper>
                 <Arrow
+                  data-testid="tabs-view-forward-arrow"
                   color="primary"
                   onClick={() => {
                     const newValue =
@@ -325,7 +327,7 @@ const TabsView = () => {
       <PanelWrapper>
         <Grid />
       </PanelWrapper>
-      <SaveButton variant="contained" color="primary">
+      <SaveButton variant="contained" color="primary" data-testid="save-button">
         {t("view.saveButton")}
       </SaveButton>
     </Box>

@@ -62,7 +62,9 @@ const PDFGroup = ({ title, PDFs, defaultExpanded }: PDFGroupProps) => {
     if (!PDFs || PDFs.length === 0) {
       return (
         <Center>
-          <Typography>{t("viewPDF.pdfList.noFiles")}</Typography>
+          <Typography data-testid="pdf-group-title-no-pdfs">
+            {t("viewPDF.pdfList.noFiles")}
+          </Typography>
         </Center>
       )
     }

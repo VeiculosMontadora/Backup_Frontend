@@ -46,20 +46,30 @@ const Dropdown = ({ fileName, index, setUploadedFiles }: DropdownProps) => {
   return (
     <DropdownArea>
       <FormControl sx={{ m: 1 }} fullWidth size="small">
-        <InputLabel id="select-manufacturer">
+        <InputLabel
+          id="select-manufacturer-label"
+          data-testid="select-manufacturer-label"
+        >
           {t("fileUpload.selectAssembler")}
         </InputLabel>
         <Select
           labelId="select-manufacturer"
           id="select-manufacturer"
+          data-testid="select-manufacturer"
           value={carManufacturer}
           onChange={handleChange}
           label={t("fileUpload.selectAssembler")}
           sx={{ background: lightGray, color: text }}
         >
-          <Item value="jeep">{t("fileUpload.pdfType.jeep")}</Item>
-          <Item value="chevrolet">{t("fileUpload.pdfType.chev")}</Item>
-          <Item value="others">{t("fileUpload.pdfType.others")}</Item>
+          <Item value="jeep" data-testid="select-manufacturer-jeep">
+            {t("fileUpload.pdfType.jeep")}
+          </Item>
+          <Item value="chevrolet" data-testid="select-manufacturer-chevrolet">
+            {t("fileUpload.pdfType.chev")}
+          </Item>
+          <Item value="others" data-testid="select-manufacturer-others">
+            {t("fileUpload.pdfType.others")}
+          </Item>
         </Select>
       </FormControl>
     </DropdownArea>

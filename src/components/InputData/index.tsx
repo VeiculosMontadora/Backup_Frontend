@@ -52,10 +52,11 @@ const InputComponent = ({ label, data, copied, small = false }: InputProps) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <Label small={small} variant="h4">
+      <Label small={small} variant="h4" data-testid="input-data-label">
         {label}
       </Label>
       <StyledInput
+        data-testid={`input-data-${label}`}
         type="text"
         value={data}
         inputMode="text"
