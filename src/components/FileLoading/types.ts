@@ -1,13 +1,9 @@
-export type LoadingIconBarProps = {
-  /** should bar be static */
-  isLoaded: boolean
-}
-
 export type Status =
   | /** When file is being send from user to client */ "downloading"
   | /** When client has downloaded the file */ "downloaded"
   | /** While awaiting for server response */ "uploading"
   | /** When server returned response */ "uploaded"
+  | /** Case something goes wrong */ "failed"
 
 export type FileLoadingProps = {
   /** file name */
@@ -19,6 +15,9 @@ export type FileLoadingProps = {
   /** has uploaded to server and back */
   isLoaded?: boolean
 
+  /** index of the file in the array */
+  index?: number
+
   /** for the "dowloaded" state */
-  handleDeleteClick?: () => void
+  handleDeleteClick?: (index: number) => void
 }

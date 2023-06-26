@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.4",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
@@ -10,7 +10,10 @@
     "lint": "eslint . --max-warnings=0 --ext .ts,.tsx",
     "format-check": "prettier --check .",
     "format": "prettier --write .",
-    "test": "vitest",
+    "test": "yarn test:unit && yarn test:e2e",
+    "test:unit": "vitest --coverage",
+    "test:e2e": "yarn cypress run",
+    "test:e2e:open": "yarn cypress open",
     "prepare": "husky install",
     "docker": "docker-compose -f docker-compose.yaml up --build -d"
   },
@@ -27,17 +30,16 @@
     ]
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^4.5.8",
-    "@mui/material": "^5.11.13",
     "@mui/icons-material": "^5.11.11",
-    "@mui/styled-engine-sc": "^5.11.11",
-    "file-loader": "^6.2.0",
+    "@mui/material": "^5.11.13",
+    "cypress": "^12.13.0",
     "i18next": "^22.4.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-dropzone": "^8.0.3",
+    "react-dropzone": "14.2.3",
     "react-i18next": "^12.2.0",
     "react-router-dom": "^6.10.0",
     "styled-components": "^5.3.9"
@@ -54,6 +56,7 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@vitejs/plugin-react": "^3.1.0",
+    "@vitest/coverage-c8": "^0.30.1",
     "eslint": "8.2.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",

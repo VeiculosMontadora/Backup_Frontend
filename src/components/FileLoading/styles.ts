@@ -1,12 +1,17 @@
 import styled from "styled-components"
 import { Typography } from "@mui/material"
-import { gray, green, red, text, white } from "../../styles/colors"
+import {
+  background,
+  green,
+  red,
+  superWhite,
+  text,
+  white,
+} from "../../styles/colors"
 
 const borderRadius = "6.18px"
-export const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
 
+export const Wrapper = styled.div`
   position: relative;
 
   gap: 50px;
@@ -15,13 +20,16 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 
   padding: 15px 20px;
-  background-color: #fff;
-  border: ${gray} 1.55px solid;
+  background-color: ${superWhite};
+  border: ${background} 1.55px solid;
   border-radius: ${borderRadius};
 
   &[data-status="uploaded"] {
     border: 2.325px solid ${green};
-    border-radius: ${borderRadius};
+  }
+
+  &[data-status="failed"] {
+    border: 2.325px solid ${red};
   }
 
   .loading-icon-bar > span {
@@ -37,7 +45,6 @@ export const Wrapper = styled.div`
 `
 
 export const DeleteButton = styled.button`
-  /* Default button reset */
   border: 0;
   outline: 0;
 
@@ -67,18 +74,13 @@ export const DeleteButton = styled.button`
 `
 
 export const Title = styled(Typography)`
-  font-size: 18.55px !important;
-  line-height: 27.8px !important;
-  color: ${text};
-`
-
-// Just for showcase, to be deleted when approved
-export const MockWrapper = styled.div`
-  gap: 3rem;
-  display: flex;
-  flex-direction: column;
-
-  > * {
-    max-height: 60px;
+  && {
+    font-size: 18.55px;
+    line-height: 27.8px;
   }
+
+  color: ${text};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `

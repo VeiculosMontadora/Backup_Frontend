@@ -9,13 +9,80 @@
     "selectedPdfs": "PDFs selecionados",
     "selectAssembler": "Selecione a montadora",
     "dropzone": {
-      "title": "Arraste e solte ou Selecione o arquivo",
+      "accepted": "Arquivo suportado",
+      "rejected": "Arquivo não suportado",
+      "title": "Arraste e solte ou ",
+      "titleURL": "Selecione o arquivo",
       "warning": "O formato .pdf é obrigatório"
+    },
+    "pdfType": {
+      "jeep": "Jeep",
+      "chev": "Chevrolet (GM)",
+      "others": "Outras"
     }
   },
   "extraction": {
-    "title": "Fazendo a extração de dados..",
-    "subtitle": "Isso pode levar de 2 a 5 minutos",
-    "success": "Extração concluída!"
+    "extracting": "Fazendo a extração de dados...",
+    "success": "Extração concluída!",
+    "fail": "Erro na extração!",
+    "partialFail": "Um ou mais pdf's deram erro."
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "A página que você está procurando não existe",
+    "button": "Voltar para a tela principal"
+  },
+  "view": {
+    "saveButton": "Salvar"
+  },
+  "viewPDF": {
+    "pdfList": {
+      "title": "Selecione o PDF para visualizá-lo",
+      "openEditors": "Editores abertos",
+      "incompleteFiles": "Arquivos incompletos",
+      "completeFiles": "Arquivos completos",
+      "noFiles": "Nenhum arquivo encontrado",
+      "go": "Ir para a página de envio de pdf"
+    },
+    "tab": {
+      "noSelectedVehicle": "Nenhum veículo selecionado",
+      "finishedButton": "Concluído"
+    },
+    "exportPDF": {
+      "JSON": "JSON",
+      "CSV": "CSV"
+    },
+    "input": {
+      "copy": "Copiar",
+      "model": "Modelo",
+      "descRenavan": "Desc Renavan",
+      "descCat": "Descrição",
+      "acronym": "Sigla",
+      "descModelo": "Pacote Def. Modelo",
+      "versao": "Versão",
+      "ano": "Ano",
+      "marca": "Marca",
+      "linha": "Linha",
+      "carrocaria": "Carroçaria",
+      "segmento": "Segmento",
+      "motor": "Motor",
+      "cilindradas": "Cilindradas",
+      "nroCilindros": "Nro Cilindros",
+      "potencia": "Potência",
+      "tipoCombustivel": "Tipo Combustível",
+      "freteEspecfico": "Frete Específico",
+      "valor": "Valor",
+      "potencia1": "Potência1",
+      "carga": "Carga",
+      "numPassag": "Num Passag",
+      "numPortas": "Num Portas",
+      "numRenavam": "Num do Renavam",
+      "especie": "Espécie",
+      "linhaServico": "Linha de Serviço",
+      "codFIPE": "Código FIPE",
+      "aliqIPI": "Aliq IPI",
+      "prazoGarantia": "Prazo Garantia",
+      "kmGarantia": "Km Garantia"
+    }
   }
 }
